@@ -1,10 +1,5 @@
 //// begin trivia code
 
-// variables
-var picked = [];
-var intervalId;
-var questions = 0;
-
 // music array
 var songs = [
     {
@@ -76,10 +71,15 @@ var songs = [
         src: "assets/music/17_the_woodlands.flac"
     }
 ]
-// global stuff
-var answer = "",
+
+// global variable stuffs
+var picked = [],
+    intervalId,
+    questions = 0,
+    answer = "",
     right = 0,
-    wrong = 0;
+    wrong = 0,
+    missed = 0;
 
 /// functions
 // load song into audio element
@@ -251,6 +251,7 @@ function queueQuestion() {
             timer--;
             infoText("Time until game begins: " + timer);
             if (timer === 0) {
+                missed++;
                 clearInterval(intervalId);
                 showButtons();
                 beginCountdown();
@@ -383,6 +384,7 @@ function resetGame() {
     picked = [];
     right = 0;
     wrong = 0;
+    missed = 0;
 }
 
 // end game
@@ -392,6 +394,7 @@ function endGame() {
     // fix the score!
     $("#rightAnswers").html(right);
     $("#wrongAnswers").html(wrong);
+    $("#missedAnswers").html(missed);
 }
 
 // hide cards!
