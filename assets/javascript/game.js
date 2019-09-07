@@ -149,19 +149,16 @@ function falseTitle(songTitle) {
             // store number in b
             b = num;
             boolKey = true;
-            console.log("B: " + b);
         }
         // if b is not empty, but c is
         else if (b !== "A" && c === "A") {
             // store number in c
             c = num;
             boolKey = true;
-            console.log("C: " + c);
         }
         // store in d if anything else
         else {
             d = num;
-            console.log("D: " + d);
         }
     }
 
@@ -171,7 +168,7 @@ function falseTitle(songTitle) {
     d = getSongTitle(d);
 
     // plug the titles into the buttons
-    
+    plugTitles(songTitle, b, c, d);
 }
 
 // function to return song title from index number
@@ -185,12 +182,13 @@ function plugTitles(title1, title2, title3, title4) {
     var titleArray = [title1, title2, title3, title4];
 
     // shuffle that array
-    shuffle(titleArray);
+    titleArray = shuffle(titleArray);
+    console.log(titleArray);
 
     // plug those titles in to the buttons with a loop!
     for (var i = 0; i < 4; i++) {
-        $("#choices"+(i+1)).val(titleArray[i]);
-        $("#choices"+(i+1)).html(titleArray[i]);
+        $("#choice"+(i+1)).val(titleArray[i]);
+        $("#choice"+(i+1)).html(titleArray[i]);
     }
 }
 
