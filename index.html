@@ -13,17 +13,67 @@
   </head>
   <body>
 
-    <div id="trivia" class="card invisible m-auto" style="width: 30rem;">
-        <div class="card-body bg-light">
-            <h5 class="card-title text-center"><audio id="audio" type="audio/flac" controls controlsList="nodownload" preload="auto"></audio></h5>
-            <h6 id="timeleft" class="card-subtitle mb-2 text-muted text-center">Time Left: <span id="timer">30</span> seconds</h6>
-            <p class="card-subtitle mb-2 text-muted text-center infotext"><br></p>
-            <p class="card-text">
-                <button id="choice1" class="btn bg-secondary text-light font-weight-bold w-100 mb-1">Test1</button>
-                <button id="choice2" class="btn bg-secondary text-light font-weight-bold w-100 mb-1">Test2</button>
-                <button id="choice3" class="btn bg-secondary text-light font-weight-bold w-100 mb-1">Test3</button>
-                <button id="choice4" class="btn bg-secondary text-light font-weight-bold w-100 mb-1">Test4</button>
-            </p>
+    <div class="container rounded mt-5">
+        <!-- begin grid -->
+        <div class="row">
+            <div class="col-sm-10 m-auto">
+                <!-- header -->
+                <div class="row">
+                    <div class="col-sm text-center p-3 mt-5 mb-3 rounded border border-dark">
+                        <h1>Project Octopath: Music Trivia</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm text-center p-3 mb-5 rounded border border-dark">
+                        <!-- card for trivia questions -->
+                        <div id="trivia" class="card m-auto border border-dark d-none" style="width: 25rem; height: 25rem;">
+                            <div class="card-body">
+                                <h5 class="card-title text-center"><audio id="audio" type="audio/flac" controls controlsList="nodownload" preload="auto"></audio></h5>
+                                <h6 id="timeleft" class="card-subtitle mb-2 text-muted text-center">Time Left: <span id="timer">30</span> seconds</h6>
+                                <p class="card-subtitle mb-2 text-muted text-center infotext"><br></p>
+                                <p class="card-text">
+                                    <br><br><br>
+                                    <button id="choice1" class="btn bg-secondary text-light font-weight-bold w-100 mb-1">Test1</button>
+                                    <button id="choice2" class="btn bg-secondary text-light font-weight-bold w-100 mb-1">Test2</button>
+                                    <button id="choice3" class="btn bg-secondary text-light font-weight-bold w-100 mb-1">Test3</button>
+                                    <button id="choice4" class="btn bg-secondary text-light font-weight-bold w-100 mb-1">Test4</button>
+                                </p>
+                            </div>
+                        </div>
+                        <!-- card for starting the game -->
+                        <div id="start" class="card m-auto border border-dark" style="width: 25rem; height: 25rem;">
+                            <div class="card-body">
+                                <h2 class="card-title text-center">Instructions</h2>
+                                <h5 class="card-text text-left">The rules are simple: </h5>
+                                <ul>
+                                    <li class="text-left">There will be 10 questions total</li>
+                                    <li class="text-left">You have 30 seconds to guess the song name</li>
+                                    <li class="text-left">Your score will be tallied at the end</li>
+                                    
+                                </ul>
+                                <br><br><br><br>
+                                To play, click on the button below!
+                                <button id="play" class="btn bg-secondary text-light font-weight-bold w-100 mb-1" value="play">Start Game</button>
+                            </div>
+                        </div>
+                        <!-- card for ending the game // score -->
+                        <div id="start" class="card m-auto border border-dark d-none" style="width: 25rem; height: 25rem;">
+                            <div class="card-body">
+                                <h2 class="card-title text-center">Thank you for playing!</h2>
+                                <h5 class="card-text text-left">Here's your score: </h5>
+                                <ul>
+                                    <li class="text-left">Correct: <span id="rightAnswers">0</span></li>
+                                    <li class="text-left">Wrong: <span id="wrongAnswers">0</span></li>
+                                </ul>
+                                <br><br><br><br><br><br>
+                                To play again, click on the button below!
+                                <button id="play" class="btn bg-secondary text-light font-weight-bold w-100 mb-1" value="play">Start Game</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
 

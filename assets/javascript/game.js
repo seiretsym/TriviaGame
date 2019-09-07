@@ -267,7 +267,7 @@ function queueQuestion() {
         }, 1000)
     }
     // if game has already started use different info text
-    else if (questions !== 10) {
+    else if (questions !== 11) {
         timer = 5;
         infoText("Time until next question: " + timer);
         intervalId = setInterval(function() {
@@ -283,6 +283,7 @@ function queueQuestion() {
             }
         }, 1000)
     }
+    // end the game after 10 questions
     else {
         endGame();
     }
@@ -387,10 +388,25 @@ function endGame() {
 
 // event listener!
 $(document).ready(function() {
-    playGame();
 
     $(".btn").on("click", function() {
-        checkAnswer(this.value);
+        // check if button is the Start Game button
+        if (this.value === "play") {
+            playGame();
+        }
+        // if not, only other buttons are answers
+        else {
+            checkAnswer(this.value);
+        }
     })
 
 })
+
+
+//// to do list
+// create scoreboard
+// add a start game button
+// make ui look nicer
+// slap kerwin
+// slap kerwin again
+// and... slap kerwin again
