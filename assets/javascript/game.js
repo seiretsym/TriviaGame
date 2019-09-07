@@ -302,12 +302,34 @@ function showButtons() {
     $("#choice4").addClass("visible").removeClass("invisible");
 }
 
+// set a timer for guessing the answer!
+function beginCountdown() {
+    var timer = 30;
+    var intervalId;
+    $("#timer").html(timer);
+    // create a countdown interval
+    intervalId = setInterval(function() {
+        timer--;
+        $("#timer").html(timer);
+        // if timer reaches 0
+        if (timer === 0) {
+            // then stop countdown
+            clearInterval(intervalId);
+            // hide buttons
+            hideButtons();
+            // update info text
+            infoText("Time's up! The correct answer is <strong>" + answer + "</strong>")
+        }
+    }, 1000);
+}
 // event listener!
 $(document).ready(function() {
     popCard();
+    beginCountdown();
 
     $(".btn").on("click", function() {
         console.log(this.value);
         checkAnswer(this.value);
     })
+
 })
