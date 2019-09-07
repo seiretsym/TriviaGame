@@ -75,7 +75,9 @@ var songs = [
     }
 ]
 // global stuff
-var answer = "";
+var answer = "",
+    right = 0,
+    wrong = 0;
 
 /// functions
 // load song into audio element
@@ -97,13 +99,13 @@ function popCard() {
     answer = randSong();
 
     // get an array of titles for correct/incorrect answers
-    var answerArray = falseTitles(title);
+    var answerArray = falseTitles(answer);
 
     // plug answers into buttons
     plugTitles(answerArray)
 
     // load song
-    loadSong(title);
+    loadSong(answer);
 
     // make card visible
     $("#trivia").removeClass("invisible");
@@ -245,10 +247,38 @@ function preloadMusic() {
 }
 
 // check answer
-function checkAnswer(answer) {
-    
+function checkAnswer(song) {
+    // if answer is correct
+    if (song === answer) {
+        // increase right count
+        answerRight();
+    }
+    // otherwise it's wrong
+    else {
+        // increase wrong count
+        answerWrong();
+    }
+
+    // get ready for next question
 }
 
+// function do something when the answer is right
+function answerRight() {
+    // increment right count
+    right++;
+    // hide buttons
+
+    // display message
+}
+
+// function to do something when the answer is wrong
+function answerWrong() {
+    // increment wrong count
+    wrong++;
+    // hide buttons
+
+    // display message
+}
 
 // event listener!
 $(document).ready(function() {
