@@ -73,3 +73,12 @@ var songs = [
         src: "assets/music/17_the_woodlands.flac"
     }
 ]
+
+/// functions
+// find song from title in object array and plug into audio element to play!
+function playSong(songTitle) {
+    var aud = document.getElementById("audio");
+    var index = songs.findIndex(songs => songs.title === songTitle);
+    $("#audio").attr("src", songs[index].src);
+    aud.play();
+}  
