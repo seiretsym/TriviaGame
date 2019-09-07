@@ -1,6 +1,7 @@
 //// begin trivia code
 
 // variables
+var picked = [];
 
 // music array
 var songs = [
@@ -81,4 +82,43 @@ function playSong(songTitle) {
     var index = songs.findIndex(songs => songs.title === songTitle);
     $("#audio").attr("src", songs[index].src);
     aud.play();
-}  
+}
+
+// pop that trivia card!
+function popCard() {
+
+}
+
+// pick a random song and return its title!
+function randSong() {
+    var boolKey = true;
+    var a;
+
+    // check if all songs have been picked
+    if (picked.length === songs.length) {
+        console.log("NO MORE SONGS");
+    }
+    else {
+        // check if song has already been picked
+        while (boolKey) {
+            // generate a random index number based off of songs.length
+            var b = Math.floor(Math.random() * songs.length);
+            a = b;
+            boolKey = false;
+            for (var i = 0; i < picked.length; i++) {
+                if (b == picked[i]) {
+                    // set boolKey to true if it has
+                    boolKey = true;
+                }
+            }
+        }
+
+        // add index to picked[]
+        picked.push(b);
+
+        // return song title
+        return songs[b].title;
+    }
+
+
+}
