@@ -375,10 +375,19 @@ function beginCountdown() {
 
 // play game
 function playGame() {
+    resetGame();
     popCard();
     setQuestion();
     hideButtons();
     queueQuestion();
+}
+
+// reset stuff to play the game
+function resetGame() {
+    questions = 0;
+    picked = [];
+    right = 0;
+    wrong = 0;
 }
 
 // end game
@@ -404,9 +413,6 @@ $(document).ready(function() {
 
 
 //// to do list
-// create scoreboard
-// add a start game button
-// make ui look nicer
 // slap kerwin
 // slap kerwin again
 // and... slap kerwin again
