@@ -2,6 +2,8 @@
 
 // variables
 var picked = [];
+var intervalId;
+var questions = 0;
 
 // music array
 var songs = [
@@ -101,23 +103,8 @@ function stopSong() {
 
 // pop that trivia card!
 function popCard() {
-    // set answer to random song
-    answer = randSong();
-
-    // get an array of titles for correct/incorrect answers
-    var answerArray = falseTitles(answer);
-
-    // plug answers into buttons
-    plugTitles(answerArray)
-
-    // load song
-    loadSong(answer);
-
     // make card visible
     $("#trivia").removeClass("invisible");
-
-    // play song
-    playSong();
 }
 
 // pick a random song and return its title!
@@ -214,7 +201,6 @@ function plugTitles(titleArray) {
 
     // shuffle that array
     titleArray = shuffle(titleArray);
-    console.log(titleArray);
 
     // plug those titles in to the buttons with a loop!
     for (var i = 0; i < 4; i++) {
@@ -238,20 +224,6 @@ function shuffle(array) {
     return array;
 }
 
-// function to preload all music using ajax!
-function preloadMusic() {
-    var count = 0;
-    for (var i = 0; i < songs.length; i++) {
-        $.ajax({
-            url: songs[i].src,
-            success: function() {
-                count++;
-                console.log(count);
-            }
-        })
-    }
-}
-
 // check answer
 function checkAnswer(song) {
     // if answer is correct
@@ -265,7 +237,71 @@ function checkAnswer(song) {
         answerWrong();
     }
 
+    // stop timer
+    clearInterval(intervalId);
+
     // get ready for next question
+    setTimeout(queueQuestion, 5000);
+}
+
+// queue question!
+function queueQuestion() {
+    stopSong();
+    setQuestion();
+    questions++;
+    // this is to make sure the info text is correct if the game just started
+    if (questions === 1) {
+        timer = 5;
+        infoText("Time until game begins: " + timer);
+        intervalId = setInterval(function() {
+            timer--;
+            infoText("Time until game begins: " + timer);
+            if (timer === 0) {
+                clearInterval(intervalId);
+                showButtons();
+                beginCountdown();
+                infoText("<br>");
+                // play song
+                playSong();
+            }
+        }, 1000)
+    }
+    // if game has already started use different info text
+    else if (questions !== 10) {
+        timer = 5;
+        infoText("Time until next question: " + timer);
+        intervalId = setInterval(function() {
+            timer--;
+            infoText("Time until next question: " + timer);
+            if (timer === 0) {
+                clearInterval(intervalId);
+                showButtons();
+                beginCountdown();
+                infoText("<br>");
+                // play song
+                playSong();
+            }
+        }, 1000)
+    }
+    else {
+        endGame();
+    }
+
+}
+
+// set question!
+function setQuestion() {
+    // set answer to random song
+    answer = randSong();
+
+    // get an array of titles for correct/incorrect answers
+    var answerArray = falseTitles(answer);
+
+    // plug answers into buttons
+    plugTitles(answerArray)
+
+    // load song
+    loadSong(answer);
 }
 
 // function do something when the answer is right
@@ -294,6 +330,8 @@ function infoText(msg) {
 }
 // hide answer buttons so they can't be clicked again
 function hideButtons() {
+    $("audio").addClass("invisible").removeClass("visible");
+    $("#timeleft").addClass("text-light").removeClass("text-muted");
     $("#choice1").addClass("invisible").removeClass("visible");
     $("#choice2").addClass("invisible").removeClass("visible");
     $("#choice3").addClass("invisible").removeClass("visible");
@@ -302,6 +340,8 @@ function hideButtons() {
 
 // show answer buttons so they can be clicked
 function showButtons() {
+    $("audio").addClass("visible").removeClass("invisible");
+    $("#timeleft").addClass("text-muted").removeClass("text-light");
     $("#choice1").addClass("visible").removeClass("invisible");
     $("#choice2").addClass("visible").removeClass("invisible");
     $("#choice3").addClass("visible").removeClass("invisible");
@@ -311,7 +351,6 @@ function showButtons() {
 // set a timer for guessing the answer!
 function beginCountdown() {
     var timer = 30;
-    var intervalId;
     $("#timer").html(timer);
     // create a countdown interval
     intervalId = setInterval(function() {
@@ -327,16 +366,30 @@ function beginCountdown() {
             infoText("Time's up! The correct answer is <strong>" + answer + "</strong>")
             // stop the song!
             stopSong();
+            // get ready for next song!
+            setTimeout(queueQuestion, 5000);
         }
     }, 1000);
 }
+
+// play game
+function playGame() {
+    popCard();
+    setQuestion();
+    hideButtons();
+    queueQuestion();
+}
+
+// end game
+function endGame() {
+    console.log("game ended");
+}
+
 // event listener!
 $(document).ready(function() {
-    popCard();
-    beginCountdown();
+    playGame();
 
     $(".btn").on("click", function() {
-        console.log(this.value);
         checkAnswer(this.value);
     })
 

@@ -14,10 +14,10 @@
   <body>
 
     <div id="trivia" class="card invisible m-auto" style="width: 30rem;">
-        <div class="card-body">
-            <h5 class="card-title text-center"><audio id="audio" type="audio/flac" controls controlsList="nodownload"></audio></h5>
-            <h6 class="card-subtitle mb-2 text-muted text-center">Time Left: <span id="timer">30</span> seconds</h6>
-            <h7 class="card-subtitle mb-2 text-muted text-center infotext"><br></h7>
+        <div class="card-body bg-light">
+            <h5 class="card-title text-center"><audio id="audio" type="audio/flac" controls controlsList="nodownload" preload="auto"></audio></h5>
+            <h6 id="timeleft" class="card-subtitle mb-2 text-muted text-center">Time Left: <span id="timer">30</span> seconds</h6>
+            <p class="card-subtitle mb-2 text-muted text-center infotext"><br></p>
             <p class="card-text">
                 <button id="choice1" class="btn bg-secondary text-light font-weight-bold w-100 mb-1">Test1</button>
                 <button id="choice2" class="btn bg-secondary text-light font-weight-bold w-100 mb-1">Test2</button>
