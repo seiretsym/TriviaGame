@@ -18,8 +18,13 @@ A trivia game that plays random music tracks for the player to guess the correct
 - GitHub
 - VSCode
 
+## Goals
+- Find a way to match countdown timer to audio timer
+- Fill the songs array by reading from a file
+- Find a way to hide source audio src paths
+
 ## Site Picture
-![Aether Collector](assets/images/readme.PNG)
+![Octopath Traveler: Music Trivia](assets/images/readme.PNG)
 
 ## Code Snippet
 I chose these lines of code because they highlight the most recent things I've learned

@@ -253,7 +253,6 @@ function queueQuestion() {
             if (timer === 0) {
                 clearInterval(intervalId);
                 showButtons();
-                beginCountdown();
                 infoText("<br>");
                 // play song
                 playSong();
@@ -270,7 +269,6 @@ function queueQuestion() {
             if (timer === 0) {
                 clearInterval(intervalId);
                 showButtons();
-                beginCountdown();
                 infoText("<br>");
                 // play song
                 playSong();
@@ -414,6 +412,7 @@ function showCard(cardId) {
 // event listener!
 $(document).ready(function() {
 
+    // listen for button clicks
     $(".btn").on("click", function() {
         // check if button is the Start Game button
         if (this.value === "play") {
@@ -425,6 +424,8 @@ $(document).ready(function() {
         }
     })
 
+    // listen for audio.play()
+    $("audio").on("play", beginCountdown);
 })
 
 
