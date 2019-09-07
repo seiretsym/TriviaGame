@@ -267,7 +267,7 @@ function answerRight() {
     // increment right count
     right++;
     // hide buttons
-
+    hideButtons();
     // display message
 }
 
@@ -276,8 +276,24 @@ function answerWrong() {
     // increment wrong count
     wrong++;
     // hide buttons
-
+    hideButtons();
     // display message
+}
+
+// hide answer buttons so they can't be clicked again
+function hideButtons() {
+    $("#choice1").addClass("invisible").removeClass("visible");
+    $("#choice2").addClass("invisible").removeClass("visible");
+    $("#choice3").addClass("invisible").removeClass("visible");
+    $("#choice4").addClass("invisible").removeClass("visible");
+}
+
+// show answer buttons so they can be clicked
+function showButtons() {
+    $("#choice1").addClass("visible").removeClass("invisible");
+    $("#choice2").addClass("visible").removeClass("invisible");
+    $("#choice3").addClass("visible").removeClass("invisible");
+    $("#choice4").addClass("visible").removeClass("invisible");
 }
 
 // event listener!
