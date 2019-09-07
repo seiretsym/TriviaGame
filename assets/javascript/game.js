@@ -135,6 +135,7 @@ function falseTitle(songTitle) {
 
     // loop until b c d has different index numbers that are not the same
     while(boolKey) {
+        // stop while loop if there's no reason to loop again
         boolKey = false;
         // generate random number
         var num = Math.floor(Math.random() * songs.length);
@@ -169,19 +170,43 @@ function falseTitle(songTitle) {
     c = getSongTitle(c);
     d = getSongTitle(d);
 
-    console.log(c);
-    console.log(b);
-    console.log(d);
+    // plug the titles into the buttons
+    
 }
 
-// get song title from index number
+// function to return song title from index number
 function getSongTitle(index) {
     return songs[index].title;
 }
 
 // randomly plug titles into answer choice buttons
-functon plugTitles(title1, title2, title3, title4) {
+function plugTitles(title1, title2, title3, title4) {
+    // create an array of titles
+    var titleArray = [title1, title2, title3, title4];
 
+    // shuffle that array
+    shuffle(titleArray);
+
+    // plug those titles in to the buttons with a loop!
+    for (var i = 0; i < 4; i++) {
+        $("#choices"+(i+1)).val(titleArray[i]);
+        $("#choices"+(i+1)).html(titleArray[i]);
+    }
+}
+
+// function to shuffle an array
+function shuffle(array) {
+    // use a for loop in reverse!
+    for (var i = array.length - 1; i > 0; i--) {
+        // create a random number based on i
+        var num = Math.floor(Math.random() * (i + 1));
+        // store array index in temp
+        var temp = array[i];
+        // do a shuffle
+        array[i] = array[num];
+        array[num] = temp;
+    }
+    return array;
 }
 
 falseTitle("Main Theme");
