@@ -332,7 +332,7 @@ function infoText(msg) {
 // hide answer buttons so they can't be clicked again
 function hideButtons() {
     $("audio").addClass("invisible").removeClass("visible");
-    $("#timeleft").addClass("text-light").removeClass("text-muted");
+    $("#timer").html("<br>");
     $("#choice1").addClass("invisible").removeClass("visible");
     $("#choice2").addClass("invisible").removeClass("visible");
     $("#choice3").addClass("invisible").removeClass("visible");
@@ -342,7 +342,7 @@ function hideButtons() {
 // show answer buttons so they can be clicked
 function showButtons() {
     $("audio").addClass("visible").removeClass("invisible");
-    $("#timeleft").addClass("text-muted").removeClass("text-light");
+    $("#timer").html("<br>");
     $("#choice1").addClass("visible").removeClass("invisible");
     $("#choice2").addClass("visible").removeClass("invisible");
     $("#choice3").addClass("visible").removeClass("invisible");
@@ -352,11 +352,11 @@ function showButtons() {
 // set a timer for guessing the answer!
 function beginCountdown() {
     var timer = 30;
-    $("#timer").html(timer);
+    $("#timer").html("Time Left: " + timer + " seconds");
     // create a countdown interval
     intervalId = setInterval(function() {
         timer--;
-        $("#timer").html(timer);
+        $("#timer").html("Time Left: " + timer + " seconds");
         // if timer reaches 0
         if (timer === 0) {
             // then stop countdown
@@ -376,6 +376,8 @@ function beginCountdown() {
 // play game
 function playGame() {
     resetGame();
+    hideCards("#start", "#end");
+    showCard("#trivia");
     popCard();
     setQuestion();
     hideButtons();
@@ -392,13 +394,23 @@ function resetGame() {
 
 // end game
 function endGame() {
-    console.log("game ended");
+    swapCard("#end", "#trivia");
+    // fix the score!
+    $("#rightAnswers").html(right);
+    $("#wrongAnswers").html(wrong);
 }
 
-// card swapper (though, technically it's just hiding and showing)
-function swapCard(show, hide) {
-    $(show).removeClass("d-none");
-    $(hide).addClass("d-none");
+// hide cards!
+function hideCards() {
+    // nifty loop utilizing arguments!
+    for (var i = 0; i < arguments.length; i++) {
+        $(arguments[i]).addClass("d-none");
+    }
+}
+
+// show card!
+function showCard(cardId) {
+    $(cardId).removeClass("d-none");
 }
 
 // event listener!
