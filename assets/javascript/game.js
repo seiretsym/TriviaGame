@@ -86,6 +86,7 @@ function playSong(songTitle) {
 
 // pop that trivia card!
 function popCard() {
+    var title = randSong();
 
 }
 
@@ -96,6 +97,7 @@ function randSong() {
 
     // check if all songs have been picked
     if (picked.length === songs.length) {
+        // do something else here
         console.log("NO MORE SONGS");
     }
     else {
@@ -119,6 +121,67 @@ function randSong() {
         // return song title
         return songs[b].title;
     }
+}
 
+// generate false song titles
+function falseTitle(songTitle) {
+    // get answer title index #
+    var a = songs.findIndex(songs => songs.title === songTitle);
+    // declare variables to store false titles give them a value so they're defined for if comparisons later
+    var b = "A",
+        c = "A",
+        d = "A";
+    var boolKey = true;
+
+    // loop until b c d has different index numbers that are not the same
+    while(boolKey) {
+        boolKey = false;
+        // generate random number
+        var num = Math.floor(Math.random() * songs.length);
+        // check if num = a, b, or c
+        if (num === a || num === b || num === c) {
+            // change boolkey to loop again for a new number
+            boolKey = true;
+        }
+        // if b is empty
+        else if (b === "A") {
+            // store number in b
+            b = num;
+            boolKey = true;
+            console.log("B: " + b);
+        }
+        // if b is not empty, but c is
+        else if (b !== "A" && c === "A") {
+            // store number in c
+            c = num;
+            boolKey = true;
+            console.log("C: " + c);
+        }
+        // store in d if anything else
+        else {
+            d = num;
+            console.log("D: " + d);
+        }
+    }
+
+    // now get the titles
+    b = getSongTitle(b);
+    c = getSongTitle(c);
+    d = getSongTitle(d);
+
+    console.log(c);
+    console.log(b);
+    console.log(d);
+}
+
+// get song title from index number
+function getSongTitle(index) {
+    return songs[index].title;
+}
+
+// randomly plug titles into answer choice buttons
+functon plugTitles(title1, title2, title3, title4) {
 
 }
+
+falseTitle("Main Theme");
