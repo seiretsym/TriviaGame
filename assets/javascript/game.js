@@ -101,12 +101,6 @@ function stopSong() {
     aud.pause();
 }
 
-// pop that trivia card!
-function popCard() {
-    // make card visible
-    $("#trivia").removeClass("invisible");
-}
-
 // pick a random song and return its title!
 function randSong() {
     var boolKey = true;
@@ -378,7 +372,6 @@ function playGame() {
     resetGame();
     hideCards("#start", "#end");
     showCard("#trivia");
-    popCard();
     setQuestion();
     hideButtons();
     queueQuestion();
@@ -394,7 +387,8 @@ function resetGame() {
 
 // end game
 function endGame() {
-    swapCard("#end", "#trivia");
+    hideCards("#start", "#trivia");
+    showCard("#end");
     // fix the score!
     $("#rightAnswers").html(right);
     $("#wrongAnswers").html(wrong);
