@@ -76,13 +76,17 @@ var songs = [
 ]
 
 /// functions
-// find song from title in object array and plug into audio element to play!
-function playSong(songTitle) {
+// load song into audio element
+function loadSong(songTitle) {
     var aud = document.getElementById("audio");
     var index = songs.findIndex(songs => songs.title === songTitle);
     $("#audio").attr("src", songs[index].src);
-    $("#audio").on("canplay", aud.play());
-    
+}
+
+// play the song!
+function playSong() {
+    var aud = document.getElementById("audio");
+    aud.play();
 }
 
 // pop that trivia card!
@@ -96,8 +100,11 @@ function popCard() {
     // plug answers into buttons
     plugTitles(answerArray)
 
+    // load song
+    loadSong(title);
+
     // play song
-    playSong(title);
+    playSong();
 }
 
 // pick a random song and return its title!
@@ -220,21 +227,19 @@ function shuffle(array) {
 
 // function to preload all music using ajax!
 function preloadMusic() {
+    var count = 0;
     for (var i = 0; i < songs.length; i++) {
         $.ajax({
             url: songs[i].src,
             success: function() {
-                console.log(songs[i].title + " loaded!");
-            },
-        });
+                count++;
+                console.log(count);
+            }
+        })
     }
 }
 
-popCard();
-
 // event listener!
-$(document).ready(function() { 
-
-    //use ajax to preload audio files
-    preloadMusic();
-});
+$(document).ready(function() {
+    popCard();
+})
