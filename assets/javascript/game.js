@@ -93,6 +93,12 @@ function playSong() {
     aud.play();
 }
 
+// stop the song!
+function stopSong() {
+    var aud = document.getElementById("audio");
+    aud.pause();
+}
+
 // pop that trivia card!
 function popCard() {
     // set answer to random song
@@ -319,6 +325,8 @@ function beginCountdown() {
             hideButtons();
             // update info text
             infoText("Time's up! The correct answer is <strong>" + answer + "</strong>")
+            // stop the song!
+            stopSong();
         }
     }, 1000);
 }
