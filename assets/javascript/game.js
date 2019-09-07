@@ -74,6 +74,8 @@ var songs = [
         src: "assets/music/17_the_woodlands.flac"
     }
 ]
+// global stuff
+var answer = "";
 
 /// functions
 // load song into audio element
@@ -91,8 +93,8 @@ function playSong() {
 
 // pop that trivia card!
 function popCard() {
-    // get a random song
-    var title = randSong();
+    // set answer to random song
+    answer = randSong();
 
     // get an array of titles for correct/incorrect answers
     var answerArray = falseTitles(title);
@@ -102,6 +104,9 @@ function popCard() {
 
     // load song
     loadSong(title);
+
+    // make card visible
+    $("#trivia").removeClass("invisible");
 
     // play song
     playSong();
@@ -239,7 +244,18 @@ function preloadMusic() {
     }
 }
 
+// check answer
+function checkAnswer(answer) {
+    
+}
+
+
 // event listener!
 $(document).ready(function() {
     popCard();
+
+    $(".btn").on("click", function() {
+        console.log(this.value);
+        checkAnswer(this.value);
+    })
 })
