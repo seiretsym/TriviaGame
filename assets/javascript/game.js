@@ -223,7 +223,6 @@ function preloadMusic() {
     for (var i = 0; i < songs.length; i++) {
         $.ajax({
             url: songs[i].src,
-            method: "GET",
             success: function() {
                 console.log(songs[i].title + " loaded!");
             },
