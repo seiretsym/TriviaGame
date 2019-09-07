@@ -81,13 +81,23 @@ function playSong(songTitle) {
     var aud = document.getElementById("audio");
     var index = songs.findIndex(songs => songs.title === songTitle);
     $("#audio").attr("src", songs[index].src);
-    aud.play();
+    $("#audio").on("canplay", aud.play());
+    
 }
 
 // pop that trivia card!
 function popCard() {
+    // get a random song
     var title = randSong();
 
+    // get an array of titles for correct/incorrect answers
+    var answerArray = falseTitles(title);
+
+    // plug answers into buttons
+    plugTitles(answerArray)
+
+    // play song
+    playSong(title);
 }
 
 // pick a random song and return its title!
@@ -124,7 +134,7 @@ function randSong() {
 }
 
 // generate false song titles
-function falseTitle(songTitle) {
+function falseTitles(songTitle) {
     // get answer title index #
     var a = songs.findIndex(songs => songs.title === songTitle);
     // declare variables to store false titles give them a value so they're defined for if comparisons later
@@ -163,12 +173,15 @@ function falseTitle(songTitle) {
     }
 
     // now get the titles
+    a = getSongTitle(a);
     b = getSongTitle(b);
     c = getSongTitle(c);
     d = getSongTitle(d);
 
-    // plug the titles into the buttons
-    plugTitles(songTitle, b, c, d);
+    // shove the titles into an array and return it
+    var array = [a, b, c, d];
+
+    return array;
 }
 
 // function to return song title from index number
@@ -177,9 +190,7 @@ function getSongTitle(index) {
 }
 
 // randomly plug titles into answer choice buttons
-function plugTitles(title1, title2, title3, title4) {
-    // create an array of titles
-    var titleArray = [title1, title2, title3, title4];
+function plugTitles(titleArray) {
 
     // shuffle that array
     titleArray = shuffle(titleArray);
@@ -207,4 +218,24 @@ function shuffle(array) {
     return array;
 }
 
-falseTitle("Main Theme");
+// function to preload all music using ajax!
+function preloadMusic() {
+    for (var i = 0; i < songs.length; i++) {
+        $.ajax({
+            url: songs[i].src,
+            method: "GET",
+            success: function() {
+                console.log(songs[i].title + " loaded!");
+            },
+        });
+    }
+}
+
+popCard();
+
+// event listener!
+$(document).ready(function() { 
+
+    //use ajax to preload audio files
+    preloadMusic();
+});
