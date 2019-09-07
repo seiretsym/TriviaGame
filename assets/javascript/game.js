@@ -269,6 +269,7 @@ function answerRight() {
     // hide buttons
     hideButtons();
     // display message
+    infoText("That's right. <strong>" + answer + "</strong> is correct!");
 }
 
 // function to do something when the answer is wrong
@@ -278,8 +279,13 @@ function answerWrong() {
     // hide buttons
     hideButtons();
     // display message
+    infoText("Wrong! The correct answer is <strong>" + answer + "</strong>");
 }
 
+// function to edit the display message on card
+function infoText(msg) {
+    $(".infotext").html(msg);
+}
 // hide answer buttons so they can't be clicked again
 function hideButtons() {
     $("#choice1").addClass("invisible").removeClass("visible");
