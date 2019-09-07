@@ -251,7 +251,6 @@ function queueQuestion() {
             timer--;
             infoText("Time until game begins: " + timer);
             if (timer === 0) {
-                missed++;
                 clearInterval(intervalId);
                 showButtons();
                 beginCountdown();
@@ -354,6 +353,8 @@ function beginCountdown() {
         $("#timer").html("Time Left: " + timer + " seconds");
         // if timer reaches 0
         if (timer === 0) {
+            // add to miss counter
+            missed++;
             // then stop countdown
             clearInterval(intervalId);
             // hide buttons
