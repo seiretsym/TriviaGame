@@ -395,6 +395,12 @@ function endGame() {
     console.log("game ended");
 }
 
+// card swapper (though, technically it's just hiding and showing)
+function swapCard(show, hide) {
+    $(show).removeClass("d-none");
+    $(hide).addClass("d-none");
+}
+
 // event listener!
 $(document).ready(function() {
 
