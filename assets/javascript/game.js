@@ -167,7 +167,7 @@ function checkAnswer(song) {
     clearInterval(intervalId);
 
     // get ready for next question
-    setTimeout(queueQuestion, 5000);
+    queueQuestion();
 }
 
 // fill queue card
@@ -187,35 +187,37 @@ function queueCharBio() {
 
 // queue question!
 function queueQuestion() {
-    stopSong();
-    setQuestion();
-    questions++;
     // show loading card
     queueCharBio();
 
-    // if game has already started use different info text
-    if (questions <= maxQuestions) {
-        timer = 5;
-        $("#timer2").html("Showing Question <strong>" + questions + "</strong> of <strong>" + maxQuestions + "</strong> in <strong>" + timer + "</strong> seconds");
-        intervalId = setInterval(function() {
-            timer--;
-            $("#timer2").html("Showing Question <strong>" + questions + "</strong> of <strong>" + maxQuestions + "</strong> in <strong>" + timer + "</strong> seconds");
-            if (timer === 0) {
-                clearInterval(intervalId);
-                // swap cards
-                hideCards("#bio");
-                showCard("#trivia");
-                showButtons();
-                // play song
-                playSong();
-            }
-        }, 1000)
-    }
-    // end the game after 10 questions
-    else {
-        endGame();
-    }
+    // set a timeout so player can see correct/wrong answers before queue timer begins
+    setTimeout(function() {
 
+        questions++;
+        // if game has already started use different info text
+        if (questions <= maxQuestions) {
+            timer = 5;
+            $("#timer2").html("Showing Question <strong>" + questions + "</strong> of <strong>" + maxQuestions + "</strong> in <strong>" + timer + "</strong> seconds");
+            intervalId = setInterval(function() {
+                timer--;
+                $("#timer2").html("Showing Question <strong>" + questions + "</strong> of <strong>" + maxQuestions + "</strong> in <strong>" + timer + "</strong> seconds");
+                if (timer === 0) {
+                    clearInterval(intervalId);
+                    stopSong();
+                    setQuestion();
+                    // swap cards
+                    hideCards("#bio");
+                    showCard("#trivia");
+                    // play song
+                    playSong();
+                }
+            }, 1000)
+        }
+        // end the game after 10 questions
+        else {
+            endGame();
+        }
+    }, 5000);
 }
 
 // set question!
@@ -237,8 +239,6 @@ function setQuestion() {
 function answerRight() {
     // increment right count
     right++;
-    // hide buttons
-    hideButtons();
     // display message
     infoText("That's right. <strong>" + answer + "</strong> is correct!");
 }
@@ -247,35 +247,13 @@ function answerRight() {
 function answerWrong() {
     // increment wrong count
     wrong++;
-    // hide buttons
-    hideButtons();
     // display message
     infoText("Wrong! The correct answer is <strong>" + answer + "</strong>");
 }
 
 // function to edit the display message on card
 function infoText(msg) {
-    $(".infotext").html(msg);
-}
-
-// hide answer buttons so they can't be clicked again
-function hideButtons() {
-    $("audio").addClass("invisible").removeClass("visible");
-    $("#timer").html("<br>");
-    $("#choice1").addClass("invisible").removeClass("visible");
-    $("#choice2").addClass("invisible").removeClass("visible");
-    $("#choice3").addClass("invisible").removeClass("visible");
-    $("#choice4").addClass("invisible").removeClass("visible");
-}
-
-// show answer buttons so they can be clicked
-function showButtons() {
-    $("audio").addClass("visible").removeClass("invisible");
-    $("#timer").html("<br>");
-    $("#choice1").addClass("visible").removeClass("invisible");
-    $("#choice2").addClass("visible").removeClass("invisible");
-    $("#choice3").addClass("visible").removeClass("invisible");
-    $("#choice4").addClass("visible").removeClass("invisible");
+    $("#timer2").html(msg);
 }
 
 // set a timer for guessing the answer!
@@ -292,14 +270,10 @@ function beginCountdown() {
             missed++;
             // then stop countdown
             clearInterval(intervalId);
-            // hide buttons
-            hideButtons();
             // update info text
             infoText("Time's up! The correct answer is <strong>" + answer + "</strong>")
-            // stop the song!
-            stopSong();
             // get ready for next song!
-            setTimeout(queueQuestion, 5000);
+            queueQuestion();
         }
     }, 1000);
 }
@@ -311,7 +285,6 @@ function playGame(selectId) {
     hideCards("#start", "#end");
     showCard("#trivia");
     setQuestion();
-    hideButtons();
     queueQuestion();
 }
 
@@ -323,11 +296,12 @@ function resetGame() {
     right = 0;
     wrong = 0;
     missed = 0;
+    infoText("<br>");
 }
 
 // end game
 function endGame() {
-    hideCards("#start", "#trivia");
+    hideCards("#start", "#trivia", "#bio");
     showCard("#end");
     // fix the score!
     $("#rightAnswers").html(right);
