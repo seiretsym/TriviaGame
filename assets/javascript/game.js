@@ -179,10 +179,10 @@ function queueQuestion() {
     // if game has already started use different info text
     if (questions !== maxQuestions) {
         timer = 5;
-        infoText("Showing Question " + questions + " of " + maxQuestions + " in " + timer);
+        infoText("Showing Question " + questions + " of " + maxQuestions + " in " + timer + " seconds");
         intervalId = setInterval(function() {
             timer--;
-            infoText("Showing Question " + questions + " of " + maxQuestions + " in " + timer);
+            infoText("Showing Question " + questions + " of " + maxQuestions + " in " + timer + " seconds");
             if (timer === 0) {
                 clearInterval(intervalId);
                 showButtons();
@@ -288,8 +288,8 @@ function beginCountdown() {
 // play game
 function playGame() {
     // set max questions based on option selected
-    maxQuestions = $("#maxQuestions").find(":selected").val();
     resetGame();
+    maxQuestions = $("#maxQuestions").find(":selected").val();
     hideCards("#start", "#end");
     showCard("#trivia");
     setQuestion();
