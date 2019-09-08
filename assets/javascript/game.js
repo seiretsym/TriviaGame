@@ -177,7 +177,7 @@ function queueQuestion() {
     setQuestion();
     questions++;
     // if game has already started use different info text
-    if (questions !== maxQuestions) {
+    if (questions <= maxQuestions) {
         timer = 5;
         infoText("Showing Question " + questions + " of " + maxQuestions + " in " + timer + " seconds");
         intervalId = setInterval(function() {
