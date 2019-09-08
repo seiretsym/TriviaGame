@@ -4,7 +4,7 @@
 A trivia game that plays random music tracks for the player to guess the correct song title. It utilizes jQuery/JS to plug in answer buttons and music. 
 
 ### **Highlights:**
-- Song List is stored in an object array
+- Song List is read from a json file and stored in an object array
 - Pulls song information from an array to randomly generate questions with answer buttons
 - Timers set for limiting time spent on a question. And, timer before asking the next question
 - Swap function!
@@ -20,7 +20,7 @@ A trivia game that plays random music tracks for the player to guess the correct
 
 ## Goals
 - Find a way to match countdown timer to audio timer
-- Fill the songs array by reading from a file
+- ~~Fill the songs array by reading from a file~~
 - Find a way to hide source audio src paths
 
 ## Site Picture

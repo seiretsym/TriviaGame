@@ -24,6 +24,7 @@ function loadSong(songTitle) {
 function playSong() {
     var aud = document.getElementById("audio");
     aud.play();
+    
 }
 
 // stop the song!
@@ -40,7 +41,7 @@ function randSong() {
     // check if all songs have been picked
     if (picked.length === songs.length) {
         // do something else here
-        console.log("NO MORE SONGS");
+        endGame();
     }
     else {
         // check if song has already been picked
@@ -51,7 +52,7 @@ function randSong() {
             boolKey = false;
             for (var i = 0; i < picked.length; i++) {
                 if (b == picked[i]) {
-                    // set boolKey to true if it has
+                    // continue looping until b is a number that hasn't been picked
                     boolKey = true;
                 }
             }
@@ -252,6 +253,7 @@ function answerWrong() {
 function infoText(msg) {
     $(".infotext").html(msg);
 }
+
 // hide answer buttons so they can't be clicked again
 function hideButtons() {
     $("audio").addClass("invisible").removeClass("visible");
@@ -348,7 +350,6 @@ function loadPlaylist() {
             success: function(result) {
                 // store info into global array
                 songs = result.list;
-                console.log(songs);
             }
         });
 }
