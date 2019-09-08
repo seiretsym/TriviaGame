@@ -30,14 +30,14 @@
                         <div id="trivia" class="card m-auto border border-dark rounded d-none" style="height: 25rem;">
                             <div class="card-body">
                                 <h5 class="card-title text-center"><audio id="audio" type="audio/flac" controls controlsList="nodownload" preload="auto"></audio></h5>
-                                <h6 class="card-subtitle mb-2 text-muted text-center"><span id="timer">Time Left: 30 seconds</span></h6>
+                                <h6 class="card-subtitle mb-2 text-muted text-center"><span id="timer"></span></h6>
                                 <p class="card-subtitle mb-2 text-muted text-center infotext"><br></p>
                                 <p class="card-text">
                                     <br><br>
-                                    <button id="choice1" class="btn bg-secondary text-light font-weight-bold w-100 mb-1">Test1</button>
-                                    <button id="choice2" class="btn bg-secondary text-light font-weight-bold w-100 mb-1">Test2</button>
-                                    <button id="choice3" class="btn bg-secondary text-light font-weight-bold w-100 mb-1">Test3</button>
-                                    <button id="choice4" class="btn bg-secondary text-light font-weight-bold w-100 mb-1">Test4</button>
+                                    <button id="choice1" class="btn bg-secondary text-light font-weight-bold w-100 mb-1"></button>
+                                    <button id="choice2" class="btn bg-secondary text-light font-weight-bold w-100 mb-1"></button>
+                                    <button id="choice3" class="btn bg-secondary text-light font-weight-bold w-100 mb-1"></button>
+                                    <button id="choice4" class="btn bg-secondary text-light font-weight-bold w-100 mb-1"></button>
                                 </p>
                             </div>
                         </div>
@@ -89,6 +89,28 @@
                                     </select>
                                     <button id="play" class="btn bg-secondary text-light font-weight-bold w-100 mb-1" value="playagain">Play Again</button>
                                 </div>
+                            </div>
+                        </div>
+                        <!-- card for loading screen -->
+                        <div id="bio" class="card m-auto border border-dark rounded d-none" style="height: 25rem;">
+                            <div class="card-body d-inline-flex flex-column overflow-auto">
+                                <h5 class="card-title mb-2 mt-2 text-muted text-center"><span id="timer2"></span></h5>
+                                <div class="card-text m-auto">
+                                    <div class="row">
+                                        <div class="col-lg-3">
+                                            <!-- character image -->
+                                            <img id="charImg">
+                                        </div>
+                                        <div class="col-lg-9">
+                                            <!-- character name -->
+                                            <h5 id="charName" class="card-text text-left"></h5>
+                                            <hr>
+                                            <!-- character description -->
+                                            <p id="charDesc" class="text-left"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- timer to load question -->
                             </div>
                         </div>
                     </div>

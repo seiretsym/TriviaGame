@@ -1,10 +1,9 @@
 //// begin trivia code
 
-// music array
-var songs = [];
-
 // global variable stuffs
 var picked = [],
+    songs = [],
+    charBio = [],
     intervalId,
     questions = 0,
     maxQuestions = 0,
@@ -171,22 +170,42 @@ function checkAnswer(song) {
     setTimeout(queueQuestion, 5000);
 }
 
+// fill queue card
+function queueCharBio() {
+    // generate random number based on charBio.length
+    var i = Math.floor(Math.random() * charBio.length);
+
+    // plug info into card elements
+    $("#charImg").attr("src", charBio[i].img);
+    $("#charName").html(charBio[i].name);
+    $("#charDesc").html(charBio[i].desc);
+
+    // show the card
+    hideCards("#trivia");
+    showCard("#bio");
+}
+
 // queue question!
 function queueQuestion() {
     stopSong();
     setQuestion();
     questions++;
+    // show loading card
+    queueCharBio();
+
     // if game has already started use different info text
     if (questions <= maxQuestions) {
         timer = 5;
-        infoText("Showing Question " + questions + " of " + maxQuestions + " in " + timer + " seconds");
+        $("#timer2").html("Showing Question <strong>" + questions + "</strong> of <strong>" + maxQuestions + "</strong> in <strong>" + timer + "</strong> seconds");
         intervalId = setInterval(function() {
             timer--;
-            infoText("Showing Question " + questions + " of " + maxQuestions + " in " + timer + " seconds");
+            $("#timer2").html("Showing Question <strong>" + questions + "</strong> of <strong>" + maxQuestions + "</strong> in <strong>" + timer + "</strong> seconds");
             if (timer === 0) {
                 clearInterval(intervalId);
+                // swap cards
+                hideCards("#bio");
+                showCard("#trivia");
                 showButtons();
-                infoText("<br>");
                 // play song
                 playSong();
             }
@@ -330,13 +349,15 @@ function showCard(cardId) {
 }
 
 // read file for playlist
-function loadPlaylist() {
+function loadJSON() {
         // read from json file
         $.getJSON({
-            url: "assets/music/playlist.json",
+            url: "assets/music/arrays.json",
             success: function(result) {
-                // store info into global array
+                // store songs into global array
                 songs = result.list;
+                // store character bios into global array
+                charBio = result.characters;
             }
         });
 }
@@ -344,8 +365,8 @@ function loadPlaylist() {
 // event listener!
 $(document).ready(function() {
 
-    // load playlist
-    loadPlaylist();
+    // load arrays
+    loadJSON();
 
     // listen for button clicks
     $(".btn").on("click", function() {
