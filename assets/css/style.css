@@ -17,6 +17,7 @@
 .h1 {
     opacity: 1;
 }
+
 /* change audio element color */
 audio::-webkit-media-controls-panel {
     background-color: #6c757d!important;

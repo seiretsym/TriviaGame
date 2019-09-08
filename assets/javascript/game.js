@@ -7,6 +7,7 @@ var songs = [];
 var picked = [],
     intervalId,
     questions = 0,
+    maxQuestions = 0,
     answer = "",
     right = 0,
     wrong = 0,
@@ -175,29 +176,13 @@ function queueQuestion() {
     stopSong();
     setQuestion();
     questions++;
-    // this is to make sure the info text is correct if the game just started
-    if (questions === 1) {
-        timer = 5;
-        infoText("Time until game begins: " + timer);
-        intervalId = setInterval(function() {
-            timer--;
-            infoText("Time until game begins: " + timer);
-            if (timer === 0) {
-                clearInterval(intervalId);
-                showButtons();
-                infoText("<br>");
-                // play song
-                playSong();
-            }
-        }, 1000)
-    }
     // if game has already started use different info text
-    else if (questions !== 11) {
+    if (questions !== maxQuestions) {
         timer = 5;
-        infoText("Time until next question: " + timer);
+        infoText("Showing Question " + questions + " of " + maxQuestions + " in " + timer);
         intervalId = setInterval(function() {
             timer--;
-            infoText("Time until next question: " + timer);
+            infoText("Showing Question " + questions + " of " + maxQuestions + " in " + timer);
             if (timer === 0) {
                 clearInterval(intervalId);
                 showButtons();
@@ -302,6 +287,8 @@ function beginCountdown() {
 
 // play game
 function playGame() {
+    // set max questions based on option selected
+    maxQuestions = $("#maxQuestions").find(":selected").val();
     resetGame();
     hideCards("#start", "#end");
     showCard("#trivia");
@@ -313,6 +300,7 @@ function playGame() {
 // reset stuff to play the game
 function resetGame() {
     questions = 0;
+    maxQuestions = 0;
     picked = [];
     right = 0;
     wrong = 0;
