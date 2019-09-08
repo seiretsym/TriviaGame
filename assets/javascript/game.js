@@ -183,6 +183,10 @@ function queueCharBio() {
     // show the card
     hideCards("#trivia");
     showCard("#bio");
+    showCard("#bio-info");
+
+    // scroll card to top
+    $("#bio-child").scrollTop(0);
 }
 
 // queue question!
@@ -206,7 +210,7 @@ function queueQuestion() {
                     stopSong();
                     setQuestion();
                     // swap cards
-                    hideCards("#bio");
+                    hideCards("#bio", "#bio-info");
                     showCard("#trivia");
                     // play song
                     playSong();
@@ -240,7 +244,7 @@ function answerRight() {
     // increment right count
     right++;
     // display message
-    infoText("That's right. <strong>" + answer + "</strong> is correct!");
+    infoText("<strong>" + answer + "</strong> is correct!");
 }
 
 // function to do something when the answer is wrong
@@ -248,7 +252,7 @@ function answerWrong() {
     // increment wrong count
     wrong++;
     // display message
-    infoText("Wrong! The correct answer is <strong>" + answer + "</strong>");
+    infoText("Wrong! Correct answer: <strong>" + answer + "</strong>");
 }
 
 // function to edit the display message on card
@@ -301,8 +305,9 @@ function resetGame() {
 
 // end game
 function endGame() {
-    hideCards("#start", "#trivia", "#bio");
+    hideCards("#start", "#trivia", "#bio", "#bio-info");
     showCard("#end");
+    stopSong();
     // fix the score!
     $("#rightAnswers").html(right);
     $("#wrongAnswers").html(wrong);
