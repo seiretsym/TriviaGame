@@ -286,10 +286,9 @@ function beginCountdown() {
 }
 
 // play game
-function playGame() {
-    // set max questions based on option selected
+function playGame(selectId) {
     resetGame();
-    maxQuestions = $("#maxQuestions").find(":selected").val();
+    maxQuestions = $(selectId).find(":selected").val();
     hideCards("#start", "#end");
     showCard("#trivia");
     setQuestion();
@@ -352,7 +351,11 @@ $(document).ready(function() {
     $(".btn").on("click", function() {
         // check if button is the Start Game button
         if (this.value === "play") {
-            playGame();
+            playGame("#select1");
+        }
+        // check if button is the Play Again button
+        else if (this.value === "playagain") {
+            playGame("#select2");
         }
         // if not, only other buttons are answers
         else {
