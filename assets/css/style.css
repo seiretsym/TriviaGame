@@ -19,5 +19,5 @@
 }
 /* change audio element color */
 audio::-webkit-media-controls-panel {
-    background-color: #6c757d !important;
+    background-color: #6c757d!important;
 }

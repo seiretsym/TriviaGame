@@ -20,20 +20,20 @@
             <div class="col-sm-10 m-auto">
                 <!-- header -->
                 <div class="row">
-                    <div class="col-sm text-center p-3 mt-5 mb-3 rounded border border-dark">
+                    <div class="col-sm text-center p-3 mt-5 mb-3 border border-dark rounded">
                         <h1>Octopath Traveler: Music Trivia</h1>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm text-center p-3 mb-5 rounded border border-dark">
                         <!-- card for trivia questions -->
-                        <div id="trivia" class="card m-auto border border-dark d-none" style="height: 25rem;">
+                        <div id="trivia" class="card m-auto border border-dark rounded d-none" style="height: 25rem;">
                             <div class="card-body">
                                 <h5 class="card-title text-center"><audio id="audio" type="audio/flac" controls controlsList="nodownload" preload="auto"></audio></h5>
                                 <h6 class="card-subtitle mb-2 text-muted text-center"><span id="timer">Time Left: 30 seconds</span></h6>
                                 <p class="card-subtitle mb-2 text-muted text-center infotext"><br></p>
                                 <p class="card-text">
-                                    <br><br><br>
+                                    <br><br>
                                     <button id="choice1" class="btn bg-secondary text-light font-weight-bold w-100 mb-1">Test1</button>
                                     <button id="choice2" class="btn bg-secondary text-light font-weight-bold w-100 mb-1">Test2</button>
                                     <button id="choice3" class="btn bg-secondary text-light font-weight-bold w-100 mb-1">Test3</button>
@@ -42,37 +42,53 @@
                             </div>
                         </div>
                         <!-- card for starting the game -->
-                        <div id="start" class="card m-auto border border-dark" style="height: 25rem;">
-                            <div class="card-body">
+                        <div id="start" class="card m-auto border border-dark rounded" style="height: 25rem;">
+                            <div class="card-body d-inline-flex flex-column">
                                 <h2 class="card-title text-center">Instructions</h2>
-                                <h5 class="card-text text-left">The rules are simple: </h5>
-                                <ul>
-                                    <li class="text-left">There will be 10 questions total</li>
-                                    <li class="text-left">You have 30 seconds per question</li>
-                                    <li class="text-left">Your score will be tallied at the end</li>
-                                    <li class="text-left">Click the buttons to answer</li>
-                                </ul>
-                                <br><br><br><br>
-                                To play, click on the button below!
-                                <button id="play" class="btn bg-secondary text-light font-weight-bold w-100 mb-1" value="play">Start Game</button>
+                                <div class="m-auto">
+                                    <h5 class="card-text text-center">The rules are simple: </h5>
+                                    <ul>
+                                        <li class="text-left">You have 30 seconds per question</li>
+                                        <li class="text-left">Your score will be tallied at the end</li>
+                                        <li class="text-left">Click the buttons to answer</li>
+                                    </ul>
+                                </div>
+                                <div class="m-auto">
+                                    Select amount of Questions:
+                                    <select class="form-control form-control-sm mt-1 mb-1">
+                                        <option>10</option>
+                                        <option>20</option>
+                                        <option>30</option>
+                                    </select>
+                                    <button id="play" class="btn bg-secondary text-light font-weight-bold w-100 mb-1" value="play">Start</button>
+                                </div>
                             </div>
                         </div>
                         <!-- card for ending the game // score -->
-                        <div id="end" class="card m-auto border border-dark d-none" style="height: 25rem;">
-                            <div class="card-body">
+                        <div id="end" class="card m-auto border border-dark rounded d-none" style="height: 25rem;">
+                            <div class="card-body d-inline-flex flex-column">
                                 <h2 class="card-title text-center">Thank you for playing!</h2>
-                                <h5 class="card-text text-left">Here's your score: </h5>
-                                <ul>
-                                    <li class="text-left">Correct: <span id="rightAnswers">0</span></li>
-                                    <li class="text-left">Wrong: <span id="wrongAnswers">0</span></li>
-                                    <li class="text-left">Missed: <span id="missedAnswers">0</span></li>
-                                </ul>
-                                <br>
-                                <p class="card-text">Hope you enjoyed the music!</p>
-                                <p class="card-text">Check out more of <a href="http://yasunorinishiki.com/" target="_new">Yasunori Nishiki</a>'s work!</p>
-                                <br>
-                                To play again, click on the button below!
-                                <button id="play" class="btn bg-secondary text-light font-weight-bold w-100 mb-1" value="play">Start Game</button>
+                                <div class="m-auto">
+                                    <h5 class="card-text text-center">Here's your score: </h5>
+                                    <ul>
+                                        <li class="text-left">Correct: <span id="rightAnswers">0</span></li>
+                                        <li class="text-left">Wrong: <span id="wrongAnswers">0</span></li>
+                                        <li class="text-left">Missed: <span id="missedAnswers">0</span></li>
+                                    </ul>
+                                </div>
+
+                                <p class="card-text">Hope you enjoyed the music!
+                                <br>Check out more of <a href="http://yasunorinishiki.com/" target="_new">Yasunori Nishiki</a>'s work!</p>
+                                
+                                <div class="m-auto">
+                                    Select amount of Questions:
+                                    <select class="form-control form-control-sm mt-1 mb-1">
+                                        <option>10</option>
+                                        <option>20</option>
+                                        <option>30</option>
+                                    </select>
+                                    <button id="play" class="btn bg-secondary text-light font-weight-bold w-100 mb-1" value="play">Play Again</button>
+                                </div>
                             </div>
                         </div>
                     </div>
