@@ -40,16 +40,14 @@ function beginCountdown() {
         $("#timer").html("Time Left: " + timer + " seconds");
         // if timer reaches 0
         if (timer === 0) {
+            // add to miss counter
+            missed++;
             // then stop countdown
             clearInterval(intervalId);
-            // hide buttons
-            hideButtons();
             // update info text
-            infoText("Time's up! The correct answer is <strong>" + answer + "</strong>")
-            // stop the song!
-            stopSong();
+            infoText("Time's up! Answer is <strong>" + answer + "</strong>")
             // get ready for next song!
-            setTimeout(queueQuestion, 5000);
+            queueQuestion();
         }
     }, 1000);
 }
