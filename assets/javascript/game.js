@@ -24,6 +24,8 @@ function loadSong(songTitle) {
 function playSong() {
     var aud = document.getElementById("audio");
     aud.play();
+    // begin countdown
+    beginCountdown();
     
 }
 
@@ -364,9 +366,6 @@ $(document).ready(function() {
             checkAnswer(this.value);
         }
     })
-
-    // listen for audio.play()
-    $("audio").on("play", beginCountdown);
 })
 
 //// to do list
