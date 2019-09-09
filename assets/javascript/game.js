@@ -344,7 +344,7 @@ function loadJSON() {
 }
 
 // event listeners!
-$(window).bind("load", function() {
+$(window).load(function() {
     // unhide start button
     $("#play").removeClass("d-none");
 }};
@@ -353,7 +353,7 @@ $(document).ready(function() {
 
     // load arrays
     loadJSON();
-    
+
     // listen for button clicks
     $(".btn").on("click", function() {
         // check if button is the Start Game button
