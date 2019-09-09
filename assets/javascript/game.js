@@ -347,7 +347,7 @@ function loadJSON() {
 $(window).load(function() {
     // unhide start button
     $("#play").removeClass("d-none");
-}};
+});
 
 $(document).ready(function() {
 
