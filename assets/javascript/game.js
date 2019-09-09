@@ -254,7 +254,7 @@ function answerWrong() {
     // increment wrong count
     wrong++;
     // display message
-    infoText("Wrong! Correct answer: <strong>" + answer + "</strong>");
+    infoText("Wrong! Answer: <strong>" + answer + "</strong>");
 }
 
 // function to edit the display message on card
@@ -277,7 +277,7 @@ function beginCountdown() {
             // then stop countdown
             clearInterval(intervalId);
             // update info text
-            infoText("Time's up! Answer is <strong>" + answer + "</strong>")
+            infoText("Time's up! Answer: <strong>" + answer + "</strong>")
             // get ready for next song!
             queueQuestion();
         }
