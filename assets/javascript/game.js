@@ -10,7 +10,8 @@ var picked = [],
     answer = "",
     right = 0,
     wrong = 0,
-    missed = 0;
+    missed = 0,
+    totalTime = 0;
 
 /// functions
 // load song into audio element
@@ -269,6 +270,7 @@ function beginCountdown() {
     // create a countdown interval
     intervalId = setInterval(function() {
         timer--;
+        totalTime++;
         $("#timer").html("Time Left: " + timer + " seconds");
         // if timer reaches 0
         if (timer === 0) {
@@ -302,6 +304,7 @@ function resetGame() {
     right = 0;
     wrong = 0;
     missed = 0;
+    totalTime = 0;
     infoText("<br>");
 }
 
@@ -314,6 +317,15 @@ function endGame() {
     $("#rightAnswers").html(right);
     $("#wrongAnswers").html(wrong);
     $("#missedAnswers").html(missed);
+    timeSpent(totalTime);
+}
+
+// plugs in minutes and seconds spent answering questions
+function timeSpent(t) {
+    var minutes = Math.floor(t / 60),
+        seconds = t % 60;
+
+        $("#timeSpent").html(minutes + "m" + seconds + "s");
 }
 
 // hide cards!
@@ -353,6 +365,7 @@ $(document).ready(function() {
 
     // load arrays
     loadJSON();
+    timeSpent(1211);
 
     // listen for button clicks
     $(".btn").on("click", function() {

@@ -65,11 +65,12 @@
                             </div>
                         </div>
                         <!-- card for ending the game // score -->
-                        <div id="end" class="card m-auto border border-dark rounded d-none" style="height: 25rem;">
+                        <div id="end" class="card m-auto border border-dark rounded" style="height: 25rem;">
                             <div class="card-body d-inline-flex flex-column">
-                                <h2 class="card-title text-center">Thank you for playing!</h2>
+                                <h3 class="card-title text-center">Thank you for playing!</h3>
                                 <div class="m-auto">
-                                    <h5 class="card-text text-center">Here's your score: </h5>
+                                    <h6>Play Time: <span id="timeSpent"></span></h6>
+                                    <h6 class="card-text text-center">Here's your score: </h6>
                                     <ul>
                                         <li class="text-left">Correct: <span id="rightAnswers">0</span></li>
                                         <li class="text-left">Wrong: <span id="wrongAnswers">0</span></li>
@@ -101,11 +102,11 @@
                             <div id="bio-child" class="card-body d-flex flex-column overflow-auto">
                                 <div class="card-text m-auto">
                                     <div class="row">
-                                        <div class="col-lg-3">
+                                        <div class="col-md-3">
                                             <!-- character image -->
                                             <img id="charImg">
                                         </div>
-                                        <div class="col-lg-9">
+                                        <div class="col-md-9">
                                             <!-- character name -->
                                             <h5 id="charName" class="card-text text-left"></h5>
                                             <hr>
