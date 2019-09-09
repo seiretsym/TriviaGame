@@ -344,7 +344,7 @@ function loadJSON() {
 }
 
 // event listeners!
-$(window).load(function() {
+$(window).bind("load", function() {
     // unhide start button
     $("#play").removeClass("d-none");
 });
