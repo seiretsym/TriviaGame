@@ -349,6 +349,9 @@ $(document).ready(function() {
     // load arrays
     loadJSON();
 
+    // unhide start button
+    $("#play").removeClass("d-none");
+
     // listen for button clicks
     $(".btn").on("click", function() {
         // check if button is the Start Game button
