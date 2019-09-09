@@ -352,10 +352,12 @@ $(document).ready(function() {
         // check if button is the Start Game button
         if (this.value === "play") {
             playGame("#select1");
+            infoText("Please wait while the game loads.");
         }
         // check if button is the Play Again button
         else if (this.value === "playagain") {
             playGame("#select2");
+            infoText("Please wait while the game loads.");
         }
         // if not, only other buttons are answers
         else {

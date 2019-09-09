@@ -22,6 +22,12 @@ A trivia game that plays random music tracks for the player to guess the correct
 - Find a way to match countdown timer to audio timer
 - ~~Fill the songs array by reading from a file~~
 - Find a way to hide source audio src paths
+- Find a way to make images and audio load fluidly
+
+## Learning Experience
+- Learned some interesting things regarding audio playback and promise
+- Learned to read/write JSONS
+- Learned that jQuery doesn't like filepaths
 
 ## Site Picture
 ![Octopath Traveler: Music Trivia](assets/images/readme.PNG)
