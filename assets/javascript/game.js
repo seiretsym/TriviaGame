@@ -364,10 +364,14 @@ function showScoreboard() {
 function getScores() {
     let list = $("#scoreboard");
     let scores = JSON.parse(localStorage.getItem("scoreboard"));
-    scores.forEach(function (player, index) {
-        let li = $("<li>").addClass("list-group-item").text(index + 1 + ": " + player.id + " - " + player.score);
-        list.append(li);
-    })
+
+    list.empty();
+    if (scores !== null) {
+        scores.forEach(function (player, index) {
+            let li = $("<li>").addClass("list-group-item").text(index + 1 + ": " + player.id + " - " + player.score);
+            list.append(li);
+        })
+    }
 }
 
 function submitScore() {
