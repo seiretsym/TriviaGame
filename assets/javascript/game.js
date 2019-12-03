@@ -386,7 +386,6 @@ function submitScore() {
         id.attr("placeholder", "Please enter your initial")
     } else {
         let currentScore = JSON.parse(localStorage.getItem("scoreboard"));
-        console.log(currentScore);
         if (currentScore === null) {
             localStorage.setItem("scoreboard", JSON.stringify([data]))
         } else {
