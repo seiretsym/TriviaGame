@@ -27,7 +27,7 @@ function playSong() {
     aud.play();
     // begin countdown
     beginCountdown();
-    
+
 }
 
 // stop the song!
@@ -80,7 +80,7 @@ function falseTitles(songTitle) {
     var boolKey = true;
 
     // loop until b c d has different index numbers that are not the same
-    while(boolKey) {
+    while (boolKey) {
         // stop while loop if there's no reason to loop again
         boolKey = false;
         // generate random number
@@ -133,8 +133,8 @@ function plugTitles(titleArray) {
 
     // plug those titles in to the buttons with a loop!
     for (var i = 0; i < 4; i++) {
-        $("#choice"+(i+1)).val(titleArray[i]);
-        $("#choice"+(i+1)).html(titleArray[i]);
+        $("#choice" + (i + 1)).val(titleArray[i]);
+        $("#choice" + (i + 1)).html(titleArray[i]);
     }
 }
 
@@ -198,14 +198,14 @@ function queueQuestion() {
     queueCharBio();
 
     // set a timeout so player can see correct/wrong answers before queue timer begins
-    setTimeout(function() {
+    setTimeout(function () {
 
         questions++;
         // if game has already started use different info text
         if (questions <= maxQuestions) {
             timer = 5;
             $("#timer2").html("Showing Question <strong>" + questions + "</strong> of <strong>" + maxQuestions + "</strong> in <strong>" + timer + "</strong> seconds");
-            intervalId = setInterval(function() {
+            intervalId = setInterval(function () {
                 timer--;
                 $("#timer2").html("Showing Question <strong>" + questions + "</strong> of <strong>" + maxQuestions + "</strong> in <strong>" + timer + "</strong> seconds");
                 if (timer === 0) {
@@ -268,7 +268,7 @@ function beginCountdown() {
     var timer = 30;
     $("#timer").html("Time Left: " + timer + " seconds");
     // create a countdown interval
-    intervalId = setInterval(function() {
+    intervalId = setInterval(function () {
         timer--;
         totalTime++;
         $("#timer").html("Time Left: " + timer + " seconds");
@@ -310,8 +310,8 @@ function resetGame() {
 
 // end game
 function endGame() {
-    hideCards("#start", "#trivia", "#bio", "#bio-info");
-    showCard("#end");
+    hideCards("#start", "#trivia", "#bio", "#bio-info", "#submitscore");
+    showCard("#submitscore");
     stopSong();
     // fix the score!
     $("#rightAnswers").html(right);
@@ -325,7 +325,7 @@ function timeSpent(t) {
     var minutes = Math.floor(t / 60),
         seconds = t % 60;
 
-        $("#timeSpent").html(minutes + "m" + seconds + "s");
+    $("#timeSpent").html(minutes + "m" + seconds + "s");
 }
 
 // hide cards!
@@ -343,32 +343,71 @@ function showCard(cardId) {
 
 // read file for playlist
 function loadJSON() {
-        // read from json file
-        $.getJSON({
-            url: "assets/music/arrays.json",
-            success: function(result) {
-                // store songs into global array
-                songs = result.list;
-                // store character bios into global array
-                charBio = result.characters;
-            }
-        });
+    // read from json file
+    $.getJSON({
+        url: "assets/music/arrays.json",
+        success: function (result) {
+            // store songs into global array
+            songs = result.list;
+            // store character bios into global array
+            charBio = result.characters;
+        }
+    });
+}
+
+function showScoreboard() {
+    getScores();
+    hideCards("#submitscore");
+    showCard("#end");
+}
+
+function getScores() {
+    let list = $("#scoreboard");
+    let scores = JSON.parse(localStorage.getItem("scoreboard"));
+    scores.forEach(function (player, index) {
+        let li = $("<li>").addClass("list-group-item").text(index + 1 + ": " + player.id + " - " + player.score);
+        list.append(li);
+    })
+}
+
+function submitScore() {
+    let id = $("#initials");
+    let data = {
+        id: id.val(),
+        score: parseInt($("#rightAnswers").text())
+    }
+
+    if (id.val().length < 1) {
+        id.focus();
+        id.attr("placeholder", "Please enter your initial")
+    } else {
+        let currentScore = JSON.parse(localStorage.getItem("scoreboard"));
+        console.log(currentScore);
+        if (currentScore === null) {
+            localStorage.setItem("scoreboard", JSON.stringify([data]))
+        } else {
+            currentScore.push(data)
+            localStorage.setItem("scoreboard", JSON.stringify(currentScore))
+        }
+        showScoreboard();
+    }
 }
 
 // event listeners!
-$(window).bind("load", function() {
+$(window).bind("load", function () {
     // unhide start button
     $("#play").removeClass("d-none");
 });
 
-$(document).ready(function() {
+$(document).ready(function () {
 
     // load arrays
     loadJSON();
     timeSpent(1211);
 
     // listen for button clicks
-    $(".btn").on("click", function() {
+    $(".btn").on("click", function () {
+        event.preventDefault();
         // check if button is the Start Game button
         if (this.value === "play") {
             playGame("#select1");
@@ -376,10 +415,18 @@ $(document).ready(function() {
         }
         // check if button is the Play Again button
         else if (this.value === "playagain") {
-            playGame("#select2");
+            hideCards("#end");
+            showCard("#start");
             infoText("Please wait while the game loads.");
         }
         // if not, only other buttons are answers
+        else if (this.value === "submitScore") {
+            submitScore();
+        }
+        else if (this.value === "resetscore") {
+            localStorage.removeItem("scoreboard");
+            getScores();
+        }
         else {
             checkAnswer(this.value);
         }
