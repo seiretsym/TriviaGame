@@ -364,7 +364,7 @@ function showScoreboard() {
 function getScores() {
     let list = $("#scoreboard");
     let scores = JSON.parse(localStorage.getItem("scoreboard"));
-
+    scores.sort((a, b) => b.score - a.score);
     list.empty();
     if (scores !== null) {
         scores.forEach(function (player, index) {
@@ -427,7 +427,8 @@ $(document).ready(function () {
             submitScore();
         }
         else if (this.value === "resetscore") {
-            localStorage.removeItem("scoreboard");
+            let empty = []
+            localStorage.setItem("scoreboard", JSON.stringify(empty));
             getScores();
         }
         else {
