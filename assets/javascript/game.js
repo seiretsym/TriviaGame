@@ -11,7 +11,8 @@ var picked = [],
     right = 0,
     wrong = 0,
     missed = 0,
-    totalTime = 0;
+    totalTime = 0,
+    score = 0;
 
 /// functions
 // load song into audio element
@@ -305,6 +306,7 @@ function resetGame() {
     wrong = 0;
     missed = 0;
     totalTime = 0;
+    score = 0;
     infoText("<br>");
 }
 
@@ -378,7 +380,7 @@ function submitScore() {
     let id = $("#initials");
     let data = {
         id: id.val(),
-        score: parseInt($("#rightAnswers").text())
+        score: score,
     }
 
     if (id.val().length < 1) {
@@ -406,7 +408,6 @@ $(document).ready(function () {
 
     // load arrays
     loadJSON();
-    timeSpent(1211);
 
     // listen for button clicks
     $(".btn").on("click", function () {
