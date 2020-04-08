@@ -1,0 +1,351 @@
+{
+    "list": [{
+        "title": "Main Theme",
+        "src": "assets/music/disc1/01_main_theme.wav"
+    },
+    {
+        "title": "Ophilia, the Cleric",
+        "src": "assets/music/disc1/02_ophilia_the_cleric.wav"
+    },
+    {
+        "title": "Cyrus, the Scholar",
+        "src": "assets/music/disc1/03_cyrus_the_scholar.wav"
+    },
+    {
+        "title": "Tressa, the Merchant",
+        "src": "assets/music/disc1/04_tressa_the_merchant.wav"
+    },
+    {
+        "title": "Olberic, the Warrior",
+        "src": "assets/music/disc1/05_olberic_the_warrior.wav"
+    },
+    {
+        "title": "Primrose, the Dancer",
+        "src": "assets/music/disc1/06_primrose_the_dancer.wav"
+    },
+    {
+        "title": "Alfyn, the Apothecary",
+        "src": "assets/music/disc1/07_alfyn_the_apothecary.wav"
+    },
+    {
+        "title": "Therion, the Thief",
+        "src": "assets/music/disc1/08_therion_the_thief.wav"
+    },
+    {
+        "title": "H'aanit, the Hunter",
+        "src": "assets/music/disc1/09_haanit_the_hunter.wav"
+    },
+    {
+        "title": "The Frostlands",
+        "src": "assets/music/disc1/10_the_frostlands.wav"
+    },
+    {
+        "title": "The Flatlands",
+        "src": "assets/music/disc1/11_the_flatlands.wav"
+    },
+    {
+        "title": "The Coastlands",
+        "src": "assets/music/disc1/12_the_coastlands.wav"
+    },
+    {
+        "title": "The Highlands",
+        "src": "assets/music/disc1/13_the_highlands.wav"
+    },
+    {
+        "title": "The Sunlands",
+        "src": "assets/music/disc1/14_the_sunlands.wav"
+    },
+    {
+        "title": "The Riverlands",
+        "src": "assets/music/disc1/15_the_riverlands.wav"
+    },
+    {
+        "title": "The Cliftlands",
+        "src": "assets/music/disc1/16_the_cliftlands.wav"
+    },
+    {
+        "title": "The Woodlands",
+        "src": "assets/music/disc1/17_the_woodlands.wav"
+    },
+    {
+        "title": "Flamegrace, Guiding Light",
+        "src": "assets/music/disc2/01_flamegrace_guiding_light.wav"
+    },
+    {
+        "title": "Melancholy",
+        "src": "assets/music/disc2/02_melancholy.wav"
+    },
+    {
+        "title": "Atlasdam, Seat of Learning",
+        "src": "assets/music/disc2/03_atlasdam_seat_of_learning.wav"
+    },
+    {
+        "title": "Tranquil Days",
+        "src": "assets/music/disc2/04_tranquil_days.wav"
+    },
+    {
+        "title": "A Sea Breeze Blows",
+        "src": "assets/music/disc2/05_a_sea_breeze_blows.wav"
+    },
+    {
+        "title": "How Amusing!",
+        "src": "assets/music/disc2/06_how_amusing.wav"
+    },
+    {
+        "title": "Cobbleston, Nestled in the Hills",
+        "src": "assets/music/disc2/07_cobbleston_nestled_in_the_hills.wav"
+    },
+    {
+        "title": "Tension",
+        "src": "assets/music/disc2/08_tension.wav"
+    },
+    {
+        "title": "A Brief Respite",
+        "src": "assets/music/disc2/09_a_brief_respite.wav"
+    },
+    {
+        "title": "Dark Caverns",
+        "src": "assets/music/disc2/10_dark_caverns.wav"
+    },
+    {
+        "title": "Battle I",
+        "src": "assets/music/disc2/11_battle_i.wav"
+    },
+    {
+        "title": "Victory Fanfare",
+        "src": "assets/music/disc2/12_victory_fanfare.wav"
+    },
+    {
+        "title": "Requiem for the Fallen",
+        "src": "assets/music/disc2/13_requiem_for_the_fallen.wav"
+    },
+    {
+        "title": "Sunshade, City of Pleasures",
+        "src": "assets/music/disc2/14_sunshade_city_of_pleasures.wav"
+    },
+    {
+        "title": "On a Knife's Edge",
+        "src": "assets/music/disc2/15_on_a_knifes_edge.wav"
+    },
+    {
+        "title": "Clearbrook, by the Pristine Waters",
+        "src": "assets/music/disc2/16_clearbrook_by_the_pristine_waters.wav"
+    },
+    {
+        "title": "Reminiscence",
+        "src": "assets/music/disc2/17_reminiscence.wav"
+    },
+    {
+        "title": "A Settlement in the Red Bluffs",
+        "src": "assets/music/disc2/18_a_settlement_in_the_red_bluffs.wav"
+    },
+    {
+        "title": "Discord",
+        "src": "assets/music/disc2/19_discord.wav"
+    },
+    {
+        "title": "My Quiet Forest Home",
+        "src": "assets/music/disc2/20_my_quiet_forest_home.wav"
+    },
+    {
+        "title": "Determination",
+        "src": "assets/music/disc2/21_determination.wav"
+    },
+    {
+        "title": "Beneath the Surface",
+        "src": "assets/music/disc2/22_beneath_the_surface.wav"
+    },
+    {
+        "title": "Creeping Dread",
+        "src": "assets/music/disc2/23_creeping_dread.wav"
+    },
+    {
+        "title": "Decisive Battle I",
+        "src": "assets/music/disc2/24_decisive_battle_i.wav"
+    },
+    {
+        "title": "Battle II",
+        "src": "assets/music/disc3/01_battle_ii.wav"
+    },
+    {
+        "title": "Town Veiled in White",
+        "src": "assets/music/disc3/02_town_veiled_in_white.wav"
+    },
+    {
+        "title": "Gazing Over the Great Plain",
+        "src": "assets/music/disc3/03_gazing_over_the_great_plain.wav"
+    },
+    {
+        "title": "Enveloped in Kindness",
+        "src": "assets/music/disc3/04_enveloped_in_kindness.wav"
+    },
+    {
+        "title": "Grandport, Center of Commerce",
+        "src": "assets/music/disc3/05_grandport_center_of_commerce.wav"
+    },
+    {
+        "title": "Among Stately Peaks",
+        "src": "assets/music/disc3/06_among_stately_peaks.wav"
+    },
+    {
+        "title": "Sorrow",
+        "src": "assets/music/disc3/07_sorrow.wav"
+    },
+    {
+        "title": "The Trees Have Eyes",
+        "src": "assets/music/disc3/08_the_trees_have_eyes.wav"
+    },
+    {
+        "title": "Despair",
+        "src": "assets/music/disc3/09_despair.wav"
+    },
+    {
+        "title": "Decisive Battle II",
+        "src": "assets/music/disc3/10_decisive_battle_ii.wav"
+    },
+    {
+        "title": "Oasis in the Sparkling Sands",
+        "src": "assets/music/disc3/11_oasis_in_the_sparkling_sands.wav"
+    },
+    {
+        "title": "River of Life",
+        "src": "assets/music/disc3/12_river_of_life.wav"
+    },
+    {
+        "title": "Bonds of Friendship",
+        "src": "assets/music/disc3/13_bonds_of_friendship.wav"
+    },
+    {
+        "title": "Orewell, Beneath the Crags",
+        "src": "assets/music/disc3/14_orewell_beneath_the_crags.wav"
+    },
+    {
+        "title": "Victors Hollow, Jewel of the Forest",
+        "src": "assets/music/disc3/15_victors_hollow_jewel_of_the_forest.wav"
+    },
+    {
+        "title": "Jubilation",
+        "src": "assets/music/disc3/16_jubilation.wav"
+    },
+    {
+        "title": "Forbidding Corridors",
+        "src": "assets/music/disc3/17_forbidden_corridors.wav"
+    },
+    {
+        "title": "An Ill Omen",
+        "src": "assets/music/disc3/18_an_ill_omen.wav"
+    },
+    {
+        "title": "Battle III",
+        "src": "assets/music/disc4/01_battle_iii.wav"
+    },
+    {
+        "title": "They Who Govern Reason",
+        "src": "assets/music/disc4/02_they_who_govern_reason.wav"
+    },
+    {
+        "title": "Stolen Dreams, Lost Light",
+        "src": "assets/music/disc4/03_stolen_dreams_lost_light.wav"
+    },
+    {
+        "title": "Pure Evil",
+        "src": "assets/music/disc4/04_pure_evil.wav"
+    },
+    {
+        "title": "For Light",
+        "src": "assets/music/disc4/05_for_light.wav"
+    },
+    {
+        "title": "For Truth",
+        "src": "assets/music/disc4/06_for_truth.wav"
+    },
+    {
+        "title": "For Treasure",
+        "src": "assets/music/disc4/07_for_treasure.wav"
+    },
+    {
+        "title": "For Redemption",
+        "src": "assets/music/disc4/08_for_redemption.wav"
+    },
+    {
+        "title": "For Revenge",
+        "src": "assets/music/disc4/09_for_revenge.wav"
+    },
+    {
+        "title": "For Succor",
+        "src": "assets/music/disc4/10_for_succor.wav"
+    },
+    {
+        "title": "For Freedom",
+        "src": "assets/music/disc4/11_for_freedom.wav"
+    },
+    {
+        "title": "For Master",
+        "src": "assets/music/disc4/12_for_master.wav"
+    },
+    {
+        "title": "Battle at Journey's End",
+        "src": "assets/music/disc4/13_battle_at_journeys_end.wav"
+    },
+    {
+        "title": "The Gate of Finis",
+        "src": "assets/music/disc4/14_the_gate_of_finis.wav"
+    },
+    {
+        "title": "The One They Call the Witch",
+        "src": "assets/music/disc4/15_the_one_they_call_the_witch.wav"
+    },
+    {
+        "title": "The Moment of Truth",
+        "src": "assets/music/disc4/16_the_moment_of_truth.wav"
+    },
+    {
+        "title": "Daughter of the Dark God",
+        "src": "assets/music/disc4/17_daughter_of_the_dark_god.wav"
+    },
+    {
+        "title": "Ending Theme",
+        "src": "assets/music/disc4/18_ending_theme.wav"
+    }],
+
+    "characters": [{
+        "name": "Ophilia Clement",
+        "desc": "Her name is Ophilia, and she is a cleric. She hails from the snowswept Frostlands, where she dutifully serves the Order of the Flame under her adoptive father, the archbishop. As her adoptive sister—and best friend—prepares to embark on a perilous pilgrimage, her stand ever at her side. But unbeknownst to the both of them, events are about to take a tragic turn...",
+        "img": "assets/images/ophilia.gif"
+    },
+    {
+        "name": "Cyrus Albright",
+        "desc": "His name is Cyrus, and he is a scholar. He teaches at the Royal Academy in Atlasdam, and though he has numerous admirers, his only true passion is the pursuit of knowledge. One day he realizes that an invaluable tome has vanished from the Royal Library piquing his insatiable curiosity...",
+        "img": "assets/images/cyrus.gif"
+    },
+    {
+        "name": "Tressa Colzione",
+        "desc": "Her name is Tressa, and she is a merchant. She stocks the shelves at her parents' shop in her sleepy, seaside hometown. Yet she often finds herself gazing out at sea, longing for something more. She thought she'd never know the answer. Then, one day, an unfamiliar vessels weighs anchor at the docks, changing her life forever...",
+        "img": "assets/images/tressa.gif"
+    },
+    {
+        "name": "Olberic Eisenberg",
+        "desc": "His name is Olberic, and he is a warrior. Once a proud knight, he lost both king and kingdom in a bloody coup. Today, he serves as a master-at-arms for a remote mountain village. To what end does he swing his blade? A question that tortured him night after restless night. One day, he overhears a name from his past, giving him new purpose...",
+        "img": "assets/images/olberic.gif"
+    },
+    {
+        "name": "Primrose Azelhart",
+        "desc": "Her name is Primrose, and she is a dancer. She plies her trade in the pleasure district of Sunshade, a town forever shrouded in darkness. In truth, she is the highborn daughter of the once-proud House Azelhart, an identity she conceals from all. Three men bearing the mark of the crow. They took her father from her. But she will have her revenge...",
+        "img": "assets/images/primrose.gif"
+    },
+    {
+        "name": "Alfyn Greengrass",
+        "desc": "His name is Alfyn, and he is an apothecary. He treats the wounded and sick in a small village amid the babbling brooks of the Riverlands. Stricken ill as a child, he was saved by a traveler who asked for nothing in return, inspiring him to follow in his footsteps. Though hesitant to leave the only home he's known, his best friend convinces him to follow his dream, wherever it may lead him...",
+        "img": "assets/images/alfyn.gif"
+    },
+    {
+        "name": "Therion",
+        "desc": "His name is Therion, and he is a thief. While his past is a guarded secret, his exploits are known far and wide. Mere whispers of his extravagant heists strike fear into the hearts of the wealthy. Drifting into the Cliftlands one day, he hears a rumor of great riches to be had. He set his sights on a mansion said to be impregnable, only to find what he never expected...",
+        "img": "assets/images/therion.gif"
+    },
+    {
+        "name": "H'aanit",
+        "desc": "Her name is H'aanit, and she is a hunter. One of the last descendants of an ancient clan that calls the deep forest home, her prowess with the bow is unmatched. Her master left home one year ago, summoned to hunt a dread beast, and she protected the village while awaiting his return. Then, one day, the return of an old friend gives her cause for concern, and she strikes out on a journey of her own.",
+        "img": "assets/images/haanit.gif"
+    }]
+}
