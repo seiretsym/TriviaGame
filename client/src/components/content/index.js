@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
-import { SET_QUESTION_LIMIT, SET_PHASE, SET_TIMER, TOGGLE_COUNTDOWN, LOAD_SONGS, SET_QUESTION, SET_CURRENT_SCORE } from "../../utils/actions";
+import { browserHistory } from "react-router-v3";
+import { SET_QUESTION_LIMIT, SET_PHASE, SET_TIMER, TOGGLE_COUNTDOWN, LOAD_SONGS, SET_QUESTION, SET_CURRENT_SCORE, SET_PLAYER_NAME } from "../../utils/actions";
 import { useStoreContext } from "../../utils/globalState";
 import Audio from "../audio";
 import API from "../../utils/api";
+import api from "../../utils/api";
 
 export const Content = () => {
   const [state, dispatch] = useStoreContext();
@@ -81,7 +83,7 @@ export const Content = () => {
         question: song,
         answers: answers,
         question_loaded: true,
-        timer: 5
+        timer: 30
       })
 
     } else {
@@ -172,9 +174,54 @@ export const Content = () => {
     })
   }
 
+  const handleInputChange = event => {
+    event.preventDefault();
+    const { value } = event.target;
+    dispatch({
+      type: SET_PLAYER_NAME,
+      player_name: value
+    })
+  }
+
+  const handleSubmitScore = () => {
+    let data = {
+      name: state.player_name,
+      score: state.current_score
+    }
+    api
+      .saveScore(data)
+      .then(() => {
+        browserHistory.push("/scores");
+        window.location.reload();
+      })
+  }
+
   const renderEndGame = () => {
     return (
-      <div>End</div>
+      <div>
+        <div className="card mx-auto border border-dark rounded mb-3">
+          <div className="card-title p-3 m-0">
+            {<h4>Your Score: {state.current_score}</h4>}
+          </div>
+        </div>
+        <div className="card mx-auto border border-dark rounded content-body">
+          <div className="card-body">
+            <div>
+              <form>
+                <input className="form-control w-25 mx-auto" type="text" value={state.player_name} placeholder="Enter your name..." onChange={handleInputChange} />
+              </form>
+              <button className="btn btn-secondary text-light w-25 mt-1" onClick={handleSubmitScore}>Submit Score</button>
+            </div>
+            <hr />
+            <div className="card-title mt-3">
+              Thank you for playing!
+            </div>
+            <div className="card-text">
+              Hope you enjoyed the music! Check out more of Yasunori Ishiki's work <a href="http://yasunorinishiki.com/" target="_new">here</a>
+            </div>
+          </div>
+        </div>
+      </div>
     )
   }
   // manipulate dom based on how a question was resolved

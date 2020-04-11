@@ -6,6 +6,7 @@ import {
   LOAD_SONGS,
   SET_CURRENT_SCORE,
   SET_PHASE,
+  SET_PLAYER_NAME,
   SET_QUESTION,
   SET_QUESTION_LIMIT,
   SET_TIMER,
@@ -35,17 +36,22 @@ const reducer = (state, action) => {
       return {
         ...state,
         songlist: action.songlist
-      }
+      };
     case SET_CURRENT_SCORE:
       return {
         ...state,
         current_score: action.current_score
-      }
+      };
     case SET_PHASE:
       return {
         ...state,
         loadTitle: action.loadTitle,
         phase: action.phase
+      };
+    case SET_PLAYER_NAME:
+      return {
+        ...state,
+        player_name: action.player_name
       };
     case SET_QUESTION:
       return {
@@ -62,7 +68,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         question_limit: action.question_limit
-      }
+      };
     case SET_TIMER:
       return {
         ...state,
@@ -91,7 +97,8 @@ const StoreProvider = ({ value = [], ...props }) => {
     songHistory: [],
     question_loaded: false,
     question_limit: 10,
-    current_score: 0
+    current_score: 0,
+    player_name: ""
   });
 
   return <Provider value={[state, dispatch]} {...props} />;

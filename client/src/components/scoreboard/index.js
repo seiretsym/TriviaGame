@@ -1,55 +1,54 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
+import api from "../../utils/api";
 
-class Scoreboard extends Component {
+const Scoreboard = () => {
+  const [score, setScore] = useState([]);
 
-  render() {
-    return (
-      <div>
-        <div className="card mx-auto border border-dark rounded mb-3">
-          <div className="card-title p-3 m-0">
-            <h4>All-Time Top 10 High Scores</h4>
-          </div>
+  useEffect(() => {
+    if (score.length < 1) {
+      api
+        .getScores()
+        .then(({ data }) => {
+          let newData = []
+          for (let i = 0; i < 10; i++) {
+            newData.push(data[i]);
+          }
+          setScore(newData);
+        })
+    }
+  })
+
+  return (
+    <div>
+      <div className="card mx-auto border border-dark rounded mb-3">
+        <div className="card-title p-3 m-0">
+          <h4>All-Time Top 10 High Scores</h4>
         </div>
-        <div className="card mx-auto border border-dark rounded p-0 scoreboard-body">
-          <ul className="list-group">
-            <li className="list-group-item">
-              1
-            </li>
-            <li className="list-group-item">
-              2
-            </li>
-            <li className="list-group-item">
-              3
-            </li>
-            <li className="list-group-item">
-              4
-            </li>
-            <li className="list-group-item">
-              5
-            </li>
-            <li className="list-group-item">
-              6
-            </li>
-            <li className="list-group-item">
-              7
-            </li>
-            <li className="list-group-item">
-              8
-            </li>
-            <li className="list-group-item">
-              9
-            </li>
-            <li className="list-group-item">
-              10
-            </li>
-          </ul>
-        </div>
-        <form action="/">
-          <button className="btn btn-secondary text-light w-100 mt-3" type="submit">Back</button>
-        </form>
       </div>
-    )
-  }
+      <div className="card mx-auto border border-dark rounded p-0 scoreboard-body">
+        <ul className="list-group">
+          {score.map((li, i) => {
+            let rank;
+            if (i < 9) {
+              rank = "0" + (i + 1);
+            } else {
+              rank = i + 1;
+            }
+            return (
+              <li className="list-group-item text-left d-flex" key={rank}>
+                <span className="btn btn-secondary text-light">{rank}</span>
+                <span className="btn btn-secondary text-light w-50 ml-2">{li.name}</span>
+                <span className="btn btn-secondary text-light w-100 ml-2"> {li.score}</span>
+              </li>
+            )
+          })}
+        </ul>
+      </div>
+      <form action="/">
+        <button className="btn btn-secondary text-light w-100 mt-3" type="submit">Back</button>
+      </form>
+    </div>
+  )
 };
 
 export default Scoreboard;
