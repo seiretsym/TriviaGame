@@ -2,7 +2,9 @@ import React, { createContext, useReducer, useContext } from "react";
 import {
   ADD_SCORE,
   GET_ALL,
-  GET_WEEKLY
+  GET_WEEKLY,
+  SET_PHASE,
+  SET_QUESTIONS,
 } from "./actions";
 
 const StoreContext = createContext();
@@ -24,7 +26,16 @@ const reducer = (state, action) => {
       return {
         ...state,
       };
-
+    case SET_PHASE:
+      return {
+        ...state,
+        phase: action.phase
+      }
+    case SET_QUESTIONS:
+      return {
+        ...state,
+        questions: action.questions
+      }
     default:
       return state;
   }
@@ -32,7 +43,9 @@ const reducer = (state, action) => {
 
 const StoreProvider = ({ value = [], ...props }) => {
   const [state, dispatch] = useReducer(reducer, {
-    scores: []
+    scores: [],
+    phase: "start",
+    questions: 10
   });
 
   return <Provider value={[state, dispatch]} {...props} />;

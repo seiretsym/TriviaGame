@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Container from "../components/container";
 import Header from "../components/header";
 import { Row, Col } from "../components/grid";
+import Content from "../components/content";
 
 class Main extends Component {
   render() {
@@ -12,10 +13,10 @@ class Main extends Component {
             <Row>
               <Header />
             </Row>
-            <Row classes="mt-3">
+            <Row classes="mt-2">
               <Col classes="-12 bg p-3 text-center rounded border border-dark mt-3">
-                test
-            </Col>
+                <Content />
+              </Col>
             </Row>
           </Col>
         </Row>
