@@ -5,3 +5,4 @@ export const SET_PHASE = "SET_PHASE";
 export const SET_QUESTIONS = "SET_QUESTIONS";
 export const SET_TIMER = "SET_TIMER";
 export const TOGGLE_COUNTDOWN = "TOGGLE_COUNTDOWN";
+export const LOAD_SONGS = "LOAD_SONGS";

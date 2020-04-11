@@ -3,6 +3,7 @@ import {
   ADD_SCORE,
   GET_ALL,
   GET_WEEKLY,
+  LOAD_SONGS,
   SET_PHASE,
   SET_QUESTIONS,
   SET_TIMER,
@@ -28,6 +29,11 @@ const reducer = (state, action) => {
       return {
         ...state,
       };
+    case LOAD_SONGS:
+      return {
+        ...state,
+        songs: [action.songs]
+      }
     case SET_PHASE:
       return {
         ...state,

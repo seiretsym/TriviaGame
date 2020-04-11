@@ -6,6 +6,7 @@ module.exports = {
   getAll: function (req, res) {
     db.Song
       .find()
+      .select("-_id -__v")
       .then(songs => res.status(200).json(songs))
       .catch(err => res.status(503).json(err));
   }
