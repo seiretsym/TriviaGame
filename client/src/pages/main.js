@@ -1,8 +1,9 @@
 import React from "react";
+import Container from "../components/container";
 
 const Main = () => {
   return (
-    <div className="container rounded mt-5 border border-dark">
+    <Container>
       <div className="row">
         <div className="col-11 p-5 mx-auto">
           <div className="row ">
@@ -16,7 +17,7 @@ const Main = () => {
           </div>
         </div>
       </div>
-    </div>
+    </Container>
   );
 }
 

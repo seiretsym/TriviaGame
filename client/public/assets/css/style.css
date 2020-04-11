@@ -3,6 +3,7 @@
     background-image: url("../images/background.jpg");
     background-size: cover;
     background-repeat: no-repeat;
+    max-height: 1080px;
 }
 
 /* make some elements a bit transparent, so it looks doesn't completely cover up the background image */
