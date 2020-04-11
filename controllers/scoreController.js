@@ -9,10 +9,6 @@ module.exports = {
       .then(() => res.status(200).end())
       .catch(err => res.status(503).json(err));
   },
-  // get weekly scores
-  getWeekly: function (req, res) {
-    console.log(Date.now());
-  },
   // get all scores and sort by highest to lowest
   getAll: function (req, res) {
     db.Score

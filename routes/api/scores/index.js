@@ -5,9 +5,6 @@ const scoreController = require("../../../controllers/scoreController");
 router.route("/")
   .post(scoreController.addScore);
 
-router.route("/weekly")
-  .get(scoreController.getWeekly);
-
 router.route("/all")
   .get(scoreController.getAll);
 

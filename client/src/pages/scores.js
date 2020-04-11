@@ -19,7 +19,7 @@ class Scores extends Component {
             </div>
           </div>
         </div>
-      </Container>
+      </Container >
     )
   };
 }
