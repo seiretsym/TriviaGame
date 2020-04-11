@@ -6,6 +6,7 @@ import Audio from "../audio";
 export const Content = () => {
   const [state, dispatch] = useStoreContext();
 
+  // start the game
   const handleStart = event => {
     dispatch({
       type: SET_PHASE,
@@ -14,6 +15,7 @@ export const Content = () => {
     // renderStartGame()
   }
 
+  // handle user choice for amount of questions
   const handleSetQuestions = event => {
     const { value } = event.target;
     dispatch({
@@ -26,6 +28,7 @@ export const Content = () => {
   const handleSubmitAnswer = event => {
     // get textContent from target button
     const { textContent: answer } = event.target;
+
     // do answer check here
     console.log(answer)
   }
@@ -37,7 +40,7 @@ export const Content = () => {
       <div>
         <div className="card mx-auto border border-dark rounded mb-3">
           <div className="card-title p-3 m-0">
-            <h4>Question 1 of 10</h4>
+            <h4>Time Left: 30 seconds</h4>
           </div>
         </div>
         <div className="card mx-auto border border-dark rounded content-body">
@@ -45,9 +48,7 @@ export const Content = () => {
             <div className="card-title text-center mt-1 mb-0">
               <Audio src="assets/music/disc1/01_main_theme.wav" />
             </div>
-            <div className="card-subtitle text-muted text-center mt-0">
-              Time Left: 30 seconds
-            </div>
+            <hr />
             <div className="card-text">
               <div className="row">
                 <div className="col-lg-6 col-sm-12">
