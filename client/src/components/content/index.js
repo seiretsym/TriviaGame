@@ -1,6 +1,7 @@
 import React from "react";
 import { SET_QUESTIONS, SET_PHASE } from "../../utils/actions";
 import { useStoreContext } from "../../utils/globalState";
+import Audio from "../audio";
 
 export const Content = () => {
   const [state, dispatch] = useStoreContext();
@@ -8,7 +9,7 @@ export const Content = () => {
   const handleStart = event => {
     dispatch({
       type: SET_PHASE,
-      phase: "load"
+      phase: "question"
     })
     // renderStartGame()
   }
@@ -21,30 +22,67 @@ export const Content = () => {
     })
   }
 
+  // handle answer submission
+  const handleSubmitAnswer = event => {
+    // get textContent from target button
+    const { textContent: answer } = event.target;
+    // do answer check here
+    console.log(answer)
+  }
+
 
   // manipulate dom to display question and answer buttons
   const renderAskQuestion = () => {
-    console.log(state);
-
-    return <div>game started</div>
-  }
-
-  // manipulate dom to display loading state
-  const renderLoadState = () => {
-    console.log(state);
     return (
       <div>
         <div className="card mx-auto border border-dark rounded mb-3">
           <div className="card-title p-3 m-0">
-            <span>Loading...</span>
+            <h4>Question 1 of 10</h4>
           </div>
         </div>
-        <div className="card mx-auto border border-dark rounded bio">
+        <div className="card mx-auto border border-dark rounded content-body">
+          <div className="card-body">
+            <div className="card-title text-center mt-1 mb-0">
+              <Audio src="assets/music/disc1/01_main_theme.wav" />
+            </div>
+            <div className="card-subtitle text-muted text-center mt-0">
+              Time Left: 30 seconds
+            </div>
+            <div className="card-text">
+              <div className="row">
+                <div className="col-lg-6 col-sm-12">
+                  <button className="btn btn-secondary text-light w-100 w-100 mt-1" onClick={handleSubmitAnswer}>1</button>
+                  <button className="btn btn-secondary text-light w-100 w-100 mt-1" onClick={handleSubmitAnswer}>1</button>
+                </div>
+                <div className="col-lg-6 col-sm-12">
+                  <button className="btn btn-secondary text-light w-100 mt-1" onClick={handleSubmitAnswer}>1</button>
+                  <button className="btn btn-secondary text-light w-100 mt-1" onClick={handleSubmitAnswer}>1</button>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  // manipulate dom to display loading state
+  const renderLoadState = () => {
+    return (
+      <div>
+        <div className="card mx-auto border border-dark rounded mb-3">
+          <div className="card-title p-3 m-0">
+            <h4>Loading...</h4>
+          </div>
+        </div>
+        <div className="card mx-auto border border-dark rounded content-body">
           <div className="card-body d-flex flex-column">
             <div className="card-text m-auto">
               <div className="row">
                 <div className="col-lg-3 col-md-12">
-                  <img src="assets/images/therion.gif"></img>
+                  <img src="assets/images/therion.gif" alt="Therion, the Thief"></img>
                 </div>
                 <div className="col-lg-9 col-md-12 overflow-auto">
                   <h5>Therion</h5>
@@ -92,7 +130,7 @@ export const Content = () => {
   switch (state.phase) {
     case "question":
       return renderAskQuestion();
-    case "load":
+    case "loading":
       return renderLoadState();
     case "start":
       return renderGameInit();
