@@ -10,7 +10,7 @@ var SongSchema = new Schema({
     required: true
   },
   url: {
-    type: Number,
+    type: String,
     required: true
   }
 })

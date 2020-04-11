@@ -33,23 +33,23 @@ const reducer = (state, action) => {
         ...state,
         loadTitle: action.loadTitle,
         phase: action.phase
-      }
+      };
     case SET_QUESTIONS:
       return {
         ...state,
         questions: action.questions
-      }
+      };
     case SET_TIMER:
       return {
         ...state,
         timer: action.timer
-      }
+      };
     case TOGGLE_COUNTDOWN:
       return {
         ...state,
         countdown: action.countdown,
         timerOn: action.timerOn
-      }
+      };
     default:
       return state;
   }
