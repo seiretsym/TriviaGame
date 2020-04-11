@@ -4,9 +4,10 @@ import {
   GET_ALL,
   GET_WEEKLY,
   LOAD_SONGS,
+  SET_CURRENT_SCORE,
   SET_PHASE,
   SET_QUESTION,
-  SET_QUESTION_AMOUNT,
+  SET_QUESTION_LIMIT,
   SET_TIMER,
   TOGGLE_COUNTDOWN
 } from "./actions";
@@ -35,6 +36,11 @@ const reducer = (state, action) => {
         ...state,
         songlist: action.songlist
       }
+    case SET_CURRENT_SCORE:
+      return {
+        ...state,
+        current_score: action.current_score
+      }
     case SET_PHASE:
       return {
         ...state,
@@ -52,10 +58,10 @@ const reducer = (state, action) => {
         songHistory: action.songHistory,
         timer: action.timer
       };
-    case SET_QUESTION_AMOUNT:
+    case SET_QUESTION_LIMIT:
       return {
         ...state,
-        question_amount: action.question_amount
+        question_limit: action.question_limit
       }
     case SET_TIMER:
       return {
@@ -84,7 +90,8 @@ const StoreProvider = ({ value = [], ...props }) => {
     countdown: null,
     songHistory: [],
     question_loaded: false,
-    question_amount: 10
+    question_limit: 10,
+    current_score: 0
   });
 
   return <Provider value={[state, dispatch]} {...props} />;

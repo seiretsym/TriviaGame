@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { SET_QUESTION_AMOUNT, SET_PHASE, SET_TIMER, TOGGLE_COUNTDOWN, LOAD_SONGS, SET_QUESTION } from "../../utils/actions";
+import { SET_QUESTION_LIMIT, SET_PHASE, SET_TIMER, TOGGLE_COUNTDOWN, LOAD_SONGS, SET_QUESTION, SET_CURRENT_SCORE } from "../../utils/actions";
 import { useStoreContext } from "../../utils/globalState";
 import Audio from "../audio";
 import API from "../../utils/api";
@@ -16,27 +16,39 @@ export const Content = () => {
         timerOn: false,
         question_loaded: false
       })
-      dispatch({
-        type: SET_PHASE,
-        loadTitle: "timeout",
-        phase: "loading"
-      })
+      handleTransition("timeout");
     }
     if (state.phase === "loading" && state.question_loaded) {
       console.log(state.question)
-      // do something after question is set
+      // dispatch to update
       dispatch({
         type: SET_PHASE,
         phase: "question"
       })
     } else if (state.phase === "loading" && !state.question_loaded) {
-      // should probably load a song
-      handleSetAnswers();
+      // should probably load a song, but after 5 seconds
+      setTimeout(handleSetAnswers, 5000);
     }
   })
 
+  // handle loading game transitioning
+  const handleTransition = title => {
+    // if the songhistory length is less than the set trivia question limit
+    if (state.songHistory.length < state.question_limit) {
+      dispatch({
+        type: SET_PHASE,
+        loadTitle: title,
+        phase: "loading"
+      })
+    }
+    // else, end the game
+    else {
+      renderEndGame()
+    }
+  }
+
   // start the game
-  const handleStart = event => {
+  const handleStart = () => {
     API
       .loadSongs()
       .then(({ data }) => {
@@ -71,6 +83,7 @@ export const Content = () => {
       })
 
     } else {
+      // JUST INCASE!
       console.log("song already picked")
     }
     console.log(song);
@@ -111,8 +124,8 @@ export const Content = () => {
   const handleSetQuestions = event => {
     const { value } = event.target;
     dispatch({
-      type: SET_QUESTION_AMOUNT,
-      question_amount: value
+      type: SET_QUESTION_LIMIT,
+      question_limit: value
     })
   }
 
@@ -122,7 +135,31 @@ export const Content = () => {
     const { textContent: answer } = event.target;
 
     // do answer check here
-    console.log(answer)
+    if (answer === state.question.q.name) {
+      // first, update the current score
+      dispatch({
+        type: SET_CURRENT_SCORE,
+        current_score: state.current_score + state.timer * 10000
+      })
+      // next, stop the interval
+      dispatch({
+        type: TOGGLE_COUNTDOWN,
+        countdown: clearInterval(state.countdown),
+        timerOn: false,
+        question_loaded: false
+      })
+      // transition
+      handleTransition("right");
+    } else {
+      // wrong answer, stop interval
+      dispatch({
+        type: TOGGLE_COUNTDOWN,
+        countdown: clearInterval(state.countdown),
+        timerOn: false,
+        question_loaded: false
+      })
+      handleTransition("wrong")
+    }
   }
 
   // starts timer interval
@@ -134,13 +171,18 @@ export const Content = () => {
     })
   }
 
+  const renderEndGame = () => {
+    console.log("game end")
+  }
   // manipulate dom based on how a question was resolved
   const renderLoadingTitle = title => {
     switch (title) {
       case "timeout":
-        return <h4>Time's up! The correct answer is <strong>Answer</strong>.</h4>
-      case "correct":
-        return <h4>You got the right answer: <strong>Answer</strong>!</h4>
+        return <h4>Time's up! The correct answer is <strong>{state.question.q.name}</strong>.</h4>
+      case "right":
+        return <h4>You got the right answer: <strong>{state.question.q.name}</strong>!</h4>
+      case "wrong":
+        return <h4>Wrong! The correct answer is <strong>{state.question.q.name}</strong>!</h4>
       default:
         return <h4>Loading... please wait.</h4>
     }
