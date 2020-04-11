@@ -30,3 +30,10 @@ audio::-webkit-media-controls-panel {
     max-height: 307px;
     overflow: auto;
 }
+
+.scoreboard-body {
+    display: flexbox;
+    height: 251px;
+    max-height: 251px;
+    overflow: auto;
+}

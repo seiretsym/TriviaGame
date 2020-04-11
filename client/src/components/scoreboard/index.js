@@ -10,7 +10,7 @@ class Scoreboard extends Component {
             <h4>All-Time Top 10 High Scores</h4>
           </div>
         </div>
-        <div className="card mx-auto border border-dark rounded p-0 content-body">
+        <div className="card mx-auto border border-dark rounded p-0 scoreboard-body">
           <ul className="list-group">
             <li className="list-group-item">
               1
@@ -44,6 +44,9 @@ class Scoreboard extends Component {
             </li>
           </ul>
         </div>
+        <form action="/">
+          <button className="btn btn-secondary text-light w-100 mt-3" type="submit">Back</button>
+        </form>
       </div>
     )
   }
