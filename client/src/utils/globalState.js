@@ -5,7 +5,8 @@ import {
   GET_WEEKLY,
   LOAD_SONGS,
   SET_PHASE,
-  SET_QUESTIONS,
+  SET_QUESTION,
+  SET_QUESTION_AMOUNT,
   SET_TIMER,
   TOGGLE_COUNTDOWN
 } from "./actions";
@@ -32,7 +33,7 @@ const reducer = (state, action) => {
     case LOAD_SONGS:
       return {
         ...state,
-        songs: action.songs
+        songlist: action.songlist
       }
     case SET_PHASE:
       return {
@@ -40,11 +41,22 @@ const reducer = (state, action) => {
         loadTitle: action.loadTitle,
         phase: action.phase
       };
-    case SET_QUESTIONS:
+    case SET_QUESTION:
       return {
         ...state,
-        questions: action.questions
+        question: {
+          q: action.question,
+          a: action.answers
+        },
+        question_loaded: action.question_loaded,
+        songHistory: action.songHistory,
+        timer: action.timer
       };
+    case SET_QUESTION_AMOUNT:
+      return {
+        ...state,
+        question_amount: action.question_amount
+      }
     case SET_TIMER:
       return {
         ...state,
@@ -54,7 +66,8 @@ const reducer = (state, action) => {
       return {
         ...state,
         countdown: action.countdown,
-        timerOn: action.timerOn
+        timerOn: action.timerOn,
+        question_loaded: action.question_loaded
       };
     default:
       return state;
@@ -66,9 +79,12 @@ const StoreProvider = ({ value = [], ...props }) => {
     scores: [],
     phase: "start",
     questions: 10,
-    timer: 5,
+    timer: 30,
     timerOn: false,
-    countdown: null
+    countdown: null,
+    songHistory: [],
+    question_loaded: false,
+    question_amount: 10
   });
 
   return <Provider value={[state, dispatch]} {...props} />;

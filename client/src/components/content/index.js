@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { SET_QUESTIONS, SET_PHASE, SET_TIMER, TOGGLE_COUNTDOWN, LOAD_SONGS } from "../../utils/actions";
+import { SET_QUESTION_AMOUNT, SET_PHASE, SET_TIMER, TOGGLE_COUNTDOWN, LOAD_SONGS, SET_QUESTION } from "../../utils/actions";
 import { useStoreContext } from "../../utils/globalState";
 import Audio from "../audio";
 import API from "../../utils/api";
@@ -13,7 +13,8 @@ export const Content = () => {
       dispatch({
         type: TOGGLE_COUNTDOWN,
         countdown: clearInterval(state.countdown),
-        timerOn: false
+        timerOn: false,
+        question_loaded: false
       })
       dispatch({
         type: SET_PHASE,
@@ -21,16 +22,27 @@ export const Content = () => {
         phase: "loading"
       })
     }
+    if (state.phase === "loading" && state.question_loaded) {
+      console.log(state.question)
+      // do something after question is set
+      dispatch({
+        type: SET_PHASE,
+        phase: "question"
+      })
+    } else if (state.phase === "loading" && !state.question_loaded) {
+      // should probably load a song
+      handleSetAnswers();
+    }
   })
 
   // start the game
   const handleStart = event => {
     API
       .loadSongs()
-      .then(songs => {
+      .then(({ data }) => {
         dispatch({
           type: LOAD_SONGS,
-          songs: songs,
+          songlist: data,
         })
         dispatch({
           type: SET_PHASE,
@@ -39,10 +51,51 @@ export const Content = () => {
       })
   }
 
+  // pick random song and generate false answers
+  const handleSetAnswers = () => {
+    // grab a random song from songlist
+    let rng = Math.floor(Math.random() * state.songlist.length)
+    console.log(state.songlist)
+    let song = state.songlist[rng];
+    // check song history for duplicates
+    if (state.songHistory.indexOf(song.name) === -1) {
+      let answers = generateAnswers(song);
+      // song hasn't been played, so set questions
+      dispatch({
+        type: SET_QUESTION,
+        songHistory: [...state.songHistory, song.name],
+        question: song,
+        answers: answers,
+        question_loaded: true,
+        timer: 5
+      })
+
+    } else {
+      console.log("song already picked")
+    }
+    console.log(song);
+  }
+
+  const generateAnswers = song => {
+    let answers = [song.name];
+    // generate false answers
+    while (answers.length < 4) {
+      let rng = Math.floor(Math.random() * state.songlist.length);
+      let falseAnswer = state.songlist[rng].name;
+      if (answers.indexOf(falseAnswer) === -1) {
+        answers = [...answers, falseAnswer]
+      }
+    }
+    // shuffle the answers
+    answers.sort(() => Math.random() - 0.5);
+    return answers;
+  }
   // when audio can play
   const handleCanPlay = event => {
     let answerContent = document.getElementById("answers");
     answerContent.classList.remove("d-none");
+    let audioPlayer = document.getElementById("audioplayer")
+    audioPlayer.play();
     startTimer();
   }
 
@@ -58,8 +111,8 @@ export const Content = () => {
   const handleSetQuestions = event => {
     const { value } = event.target;
     dispatch({
-      type: SET_QUESTIONS,
-      questions: value
+      type: SET_QUESTION_AMOUNT,
+      question_amount: value
     })
   }
 
@@ -105,18 +158,18 @@ export const Content = () => {
         <div className="card mx-auto border border-dark rounded content-body">
           <div className="card-body">
             <div className="card-title text-center mt-1 mb-0">
-              <Audio src={"https://docs.google.com/uc?export=download&id=1P_2zu9hdd_FeUenzRQ5whC6M-sIjXDh3"} controls controlsList="nodownload" onCanPlay={handleCanPlay} />
+              <Audio id="audioplayer" src={state.question.q.url} controls controlsList="nodownload" onCanPlay={handleCanPlay} />
             </div>
             <hr />
             <div id="answers" className="card-text d-none">
               <div className="row">
                 <div className="col-lg-6 col-sm-12">
-                  <button className="btn btn-secondary text-light w-100 w-100 mt-1" onClick={handleSubmitAnswer}>1</button>
-                  <button className="btn btn-secondary text-light w-100 w-100 mt-1" onClick={handleSubmitAnswer}>1</button>
+                  <button className="btn btn-secondary text-light w-100 w-100 mt-1" onClick={handleSubmitAnswer}>{state.question.a[0]}</button>
+                  <button className="btn btn-secondary text-light w-100 w-100 mt-1" onClick={handleSubmitAnswer}>{state.question.a[1]}</button>
                 </div>
                 <div className="col-lg-6 col-sm-12">
-                  <button className="btn btn-secondary text-light w-100 mt-1" onClick={handleSubmitAnswer}>1</button>
-                  <button className="btn btn-secondary text-light w-100 mt-1" onClick={handleSubmitAnswer}>1</button>
+                  <button className="btn btn-secondary text-light w-100 mt-1" onClick={handleSubmitAnswer}>{state.question.a[2]}</button>
+                  <button className="btn btn-secondary text-light w-100 mt-1" onClick={handleSubmitAnswer}>{state.question.a[3]}</button>
                 </div>
               </div>
             </div>
@@ -193,7 +246,7 @@ export const Content = () => {
     case "start":
       return renderGameInit();
     default: {
-      return <div>nope</div>;
+      return <div>Something broke. Tell Kerwin.</div>;
     }
   }
 }
