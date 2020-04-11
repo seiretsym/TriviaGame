@@ -1,10 +1,26 @@
-import React from "react";
-import { SET_QUESTIONS, SET_PHASE } from "../../utils/actions";
+import React, { useEffect } from "react";
+import { SET_QUESTIONS, SET_PHASE, SET_TIMER, TOGGLE_COUNTDOWN } from "../../utils/actions";
 import { useStoreContext } from "../../utils/globalState";
 import Audio from "../audio";
 
 export const Content = () => {
   const [state, dispatch] = useStoreContext();
+
+  useEffect(() => {
+    // stop countdown if it reaches 0
+    if (state.timer <= 0 && state.timerOn) {
+      dispatch({
+        type: TOGGLE_COUNTDOWN,
+        countdown: clearInterval(state.countdown),
+        timerOn: false
+      })
+      dispatch({
+        type: SET_PHASE,
+        loadTitle: "timeout",
+        phase: "loading"
+      })
+    }
+  })
 
   // start the game
   const handleStart = event => {
@@ -13,6 +29,21 @@ export const Content = () => {
       phase: "question"
     })
     // renderStartGame()
+  }
+
+  // when audio can play
+  const handleCanPlay = event => {
+    let answerContent = document.getElementById("answers");
+    answerContent.classList.remove("d-none");
+    startTimer();
+  }
+
+  // handle timer countdown to 0
+  const handleCountdown = () => {
+    dispatch({
+      type: SET_TIMER,
+      timer: state.timer--
+    })
   }
 
   // handle user choice for amount of questions
@@ -33,6 +64,26 @@ export const Content = () => {
     console.log(answer)
   }
 
+  // starts timer interval
+  const startTimer = () => {
+    dispatch({
+      type: TOGGLE_COUNTDOWN,
+      countdown: setInterval(handleCountdown, 1000),
+      timerOn: true
+    })
+  }
+
+  // manipulate dom based on how a question was resolved
+  const renderLoadingTitle = title => {
+    switch (title) {
+      case "timeout":
+        return <h4>Time's up! The correct answer is <strong>Answer</strong>.</h4>
+      case "correct":
+        return <h4>You got the right answer: <strong>Answer</strong>!</h4>
+      default:
+        return <h4>Loading... please wait.</h4>
+    }
+  }
 
   // manipulate dom to display question and answer buttons
   const renderAskQuestion = () => {
@@ -40,16 +91,16 @@ export const Content = () => {
       <div>
         <div className="card mx-auto border border-dark rounded mb-3">
           <div className="card-title p-3 m-0">
-            <h4>Time Left: 30 seconds</h4>
+            {<h4>Time Left: {state.timer} seconds</h4>}
           </div>
         </div>
         <div className="card mx-auto border border-dark rounded content-body">
           <div className="card-body">
             <div className="card-title text-center mt-1 mb-0">
-              <Audio src="assets/music/disc1/01_main_theme.wav" />
+              <Audio src={"https://docs.google.com/uc?export=download&id=1P_2zu9hdd_FeUenzRQ5whC6M-sIjXDh3"} controls controlsList="nodownload" onCanPlay={handleCanPlay} />
             </div>
             <hr />
-            <div className="card-text">
+            <div id="answers" className="card-text d-none">
               <div className="row">
                 <div className="col-lg-6 col-sm-12">
                   <button className="btn btn-secondary text-light w-100 w-100 mt-1" onClick={handleSubmitAnswer}>1</button>
@@ -60,8 +111,6 @@ export const Content = () => {
                   <button className="btn btn-secondary text-light w-100 mt-1" onClick={handleSubmitAnswer}>1</button>
                 </div>
               </div>
-
-
             </div>
           </div>
         </div>
@@ -70,12 +119,12 @@ export const Content = () => {
   }
 
   // manipulate dom to display loading state
-  const renderLoadState = () => {
+  const renderLoadState = title => {
     return (
       <div>
         <div className="card mx-auto border border-dark rounded mb-3">
           <div className="card-title p-3 m-0">
-            <h4>Loading...</h4>
+            {renderLoadingTitle(title)}
           </div>
         </div>
         <div className="card mx-auto border border-dark rounded content-body">
@@ -132,7 +181,7 @@ export const Content = () => {
     case "question":
       return renderAskQuestion();
     case "loading":
-      return renderLoadState();
+      return renderLoadState(state.loadTitle);
     case "start":
       return renderGameInit();
     default: {
