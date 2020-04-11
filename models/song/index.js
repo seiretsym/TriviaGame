@@ -16,7 +16,7 @@ var SongSchema = new Schema({
 })
 
 // create model
-var Song = mongoose.model("Score", SongSchema);
+var Song = mongoose.model("Song", SongSchema);
 
 // export model
 module.exports = Song;
