@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const songController = require("../../controllers/songController");
+const songController = require("../../../controllers/songController");
 
 // Matches with "api/scores"
 router.route("/")
