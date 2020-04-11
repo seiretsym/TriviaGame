@@ -1,7 +1,6 @@
 import React from "react";
 import { SET_QUESTIONS, SET_PHASE } from "../../utils/actions";
 import { useStoreContext } from "../../utils/globalState";
-import { set } from "mongoose";
 
 export const Content = () => {
   const [state, dispatch] = useStoreContext();
@@ -9,8 +8,9 @@ export const Content = () => {
   const handleStart = event => {
     dispatch({
       type: SET_PHASE,
-      phase: "play"
+      phase: "load"
     })
+    // renderStartGame()
   }
 
   const handleSetQuestions = event => {
@@ -21,14 +21,48 @@ export const Content = () => {
     })
   }
 
-  const renderStartGame = () => {
+
+  // manipulate dom to display question and answer buttons
+  const renderAskQuestion = () => {
     console.log(state);
+
     return <div>game started</div>
   }
 
+  // manipulate dom to display loading state
+  const renderLoadState = () => {
+    console.log(state);
+    return (
+      <div>
+        <div className="card mx-auto border border-dark rounded mb-3">
+          <div className="card-title p-3 m-0">
+            <span>Loading...</span>
+          </div>
+        </div>
+        <div className="card mx-auto border border-dark rounded bio">
+          <div className="card-body d-flex flex-column">
+            <div className="card-text m-auto">
+              <div className="row">
+                <div className="col-lg-3 col-md-12">
+                  <img src="assets/images/therion.gif"></img>
+                </div>
+                <div className="col-lg-9 col-md-12 overflow-auto">
+                  <h5>Therion</h5>
+                  <hr />
+                  <p>His name is Therion, and he is a thief. While his past is a guarded secret, his exploits are known far and wide. Mere whispers of his extravagant heists strike fear into the hearts of the wealthy. Drifting into the Cliftlands one day, he hears a rumor of great riches to be had. He set his sights on a mansion said to be impregnable, only to find what he never expected...</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  // render initial page components for selecting game options
   const renderGameInit = () => {
     return (
-      <div className="card m-auto border border-dark rounded p-2">
+      <div className="card mx-auto border border-dark rounded p-2">
         <div className="card-body d-inline-flex flex-column">
           <h2 className="card-title text-center">Instructions</h2>
 
@@ -56,8 +90,10 @@ export const Content = () => {
   }
 
   switch (state.phase) {
-    case "play":
-      return renderStartGame();
+    case "question":
+      return renderAskQuestion();
+    case "load":
+      return renderLoadState();
     case "start":
       return renderGameInit();
     default: {

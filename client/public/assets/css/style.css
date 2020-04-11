@@ -23,3 +23,10 @@
 audio::-webkit-media-controls-panel {
     background-color: #6c757d!important;
 }
+
+.bio {
+    display: flexbox;
+    height: 319px;
+    max-height: 319px;
+    overflow: auto;
+}
