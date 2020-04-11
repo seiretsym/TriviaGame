@@ -9,7 +9,7 @@ export const Content = () => {
 
   useEffect(() => {
     // stop countdown if it reaches 0
-    if (state.timer <= 0 && state.timerOn) {
+    if (state.timer <= 0 && state.timerOn && state.phase === "question") {
       dispatch({
         type: TOGGLE_COUNTDOWN,
         countdown: clearInterval(state.countdown),
@@ -19,7 +19,6 @@ export const Content = () => {
       handleTransition("timeout");
     }
     if (state.phase === "loading" && state.question_loaded) {
-      console.log(state.question)
       // dispatch to update
       dispatch({
         type: SET_PHASE,
@@ -43,7 +42,11 @@ export const Content = () => {
     }
     // else, end the game
     else {
-      renderEndGame()
+      // change phase to end game
+      dispatch({
+        type: SET_PHASE,
+        phase: "end"
+      })
     }
   }
 
@@ -67,7 +70,6 @@ export const Content = () => {
   const handleSetAnswers = () => {
     // grab a random song from songlist
     let rng = Math.floor(Math.random() * state.songlist.length)
-    console.log(state.songlist)
     let song = state.songlist[rng];
     // check song history for duplicates
     if (state.songHistory.indexOf(song.name) === -1) {
@@ -83,10 +85,9 @@ export const Content = () => {
       })
 
     } else {
-      // JUST INCASE!
-      console.log("song already picked")
+      // loop
+      handleSetAnswers();
     }
-    console.log(song);
   }
 
   const generateAnswers = song => {
@@ -172,7 +173,9 @@ export const Content = () => {
   }
 
   const renderEndGame = () => {
-    console.log("game end")
+    return (
+      <div>End</div>
+    )
   }
   // manipulate dom based on how a question was resolved
   const renderLoadingTitle = title => {
@@ -281,6 +284,8 @@ export const Content = () => {
   }
 
   switch (state.phase) {
+    case "end":
+      return renderEndGame();
     case "question":
       return renderAskQuestion();
     case "loading":
