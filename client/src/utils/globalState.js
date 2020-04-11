@@ -32,7 +32,7 @@ const reducer = (state, action) => {
     case LOAD_SONGS:
       return {
         ...state,
-        songs: [action.songs]
+        songs: action.songs
       }
     case SET_PHASE:
       return {

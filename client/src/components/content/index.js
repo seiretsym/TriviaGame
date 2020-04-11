@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
-import { SET_QUESTIONS, SET_PHASE, SET_TIMER, TOGGLE_COUNTDOWN } from "../../utils/actions";
+import { SET_QUESTIONS, SET_PHASE, SET_TIMER, TOGGLE_COUNTDOWN, LOAD_SONGS } from "../../utils/actions";
 import { useStoreContext } from "../../utils/globalState";
 import Audio from "../audio";
+import API from "../../utils/api";
 
 export const Content = () => {
   const [state, dispatch] = useStoreContext();
@@ -24,11 +25,18 @@ export const Content = () => {
 
   // start the game
   const handleStart = event => {
-    dispatch({
-      type: SET_PHASE,
-      phase: "question"
-    })
-    // renderStartGame()
+    API
+      .loadSongs()
+      .then(songs => {
+        dispatch({
+          type: LOAD_SONGS,
+          songs: songs,
+        })
+        dispatch({
+          type: SET_PHASE,
+          phase: "loading"
+        })
+      })
   }
 
   // when audio can play
