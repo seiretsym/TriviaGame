@@ -1,0 +1,39 @@
+/* add background image because it's cool */
+.container {
+    background-image: url("../images/background.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    max-height: 1080px;
+}
+
+/* make some elements a bit transparent, so it looks doesn't completely cover up the background image */
+
+.bg {
+    background: rgba(248, 249, 250, 0.5);
+}
+.card {
+    background: rgba(248, 249, 250, .8);
+}
+
+.h1 {
+    opacity: 1;
+}
+
+/* change audio element color */
+audio::-webkit-media-controls-panel {
+    background-color: #6c757d!important;
+}
+
+.content-body {
+    display: flexbox;
+    height: 307px;
+    max-height: 307px;
+    overflow: auto;
+}
+
+.scoreboard-body {
+    display: flexbox;
+    height: 251px;
+    max-height: 251px;
+    overflow: auto;
+}
