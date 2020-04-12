@@ -28,19 +28,21 @@ const Scoreboard = () => {
       <div className="card mx-auto border border-dark rounded p-0 scoreboard-body">
         <ul className="list-group">
           {score.map((li, i) => {
-            let rank;
-            if (i < 9) {
-              rank = "0" + (i + 1);
-            } else {
-              rank = i + 1;
+            if (li) {
+              let rank;
+              if (i < 9) {
+                rank = "0" + (i + 1);
+              } else {
+                rank = i + 1;
+              }
+              return (
+                <li className="list-group-item text-left d-flex bg-transparent" key={rank}>
+                  <span className="btn btn-secondary text-light">{rank}</span>
+                  <span className="btn btn-secondary text-light w-50 ml-2">{li.name}</span>
+                  <span className="btn btn-secondary text-light w-100 ml-2"> {li.score}</span>
+                </li>
+              )
             }
-            return (
-              <li className="list-group-item text-left d-flex bg-transparent" key={rank}>
-                <span className="btn btn-secondary text-light">{rank}</span>
-                <span className="btn btn-secondary text-light w-50 ml-2">{li.name}</span>
-                <span className="btn btn-secondary text-light w-100 ml-2"> {li.score}</span>
-              </li>
-            )
           })}
         </ul>
       </div>
