@@ -42,6 +42,8 @@ const Scoreboard = () => {
                   <span className="btn btn-secondary text-light w-100 ml-2"> {li.score}</span>
                 </li>
               )
+            } else {
+              return <div key={i} />
             }
           })}
         </ul>

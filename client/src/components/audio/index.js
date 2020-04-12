@@ -3,9 +3,7 @@ import React, { Component } from "react";
 class Audio extends Component {
   render() {
     return (
-      <audio {...this.props}>
-        <source src={this.props.src} type="audio/wav" />
-      </audio>
+      <audio src={this.props.src} controls controlsList="nodownload" type="audio/wav" {...this.props} />
     );
   }
 }

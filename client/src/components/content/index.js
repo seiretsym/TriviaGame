@@ -274,7 +274,7 @@ export const Content = () => {
         <div className="card mx-auto border border-dark rounded content-body">
           <div className="card-body">
             <div className="card-title text-center mt-1 mb-0">
-              <Audio id="audioplayer" src={state.question.q.url} controls controlsList="nodownload" onCanPlay={handleCanPlay} onError={handleAudioError} />
+              <Audio id="audioplayer" src={state.question.q.url} onCanPlay={handleCanPlay} onError={handleAudioError} />
             </div>
             <hr />
             <div id="answers" className="card-text d-none">
