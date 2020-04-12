@@ -15,6 +15,10 @@ function App() {
             <Route path="/scores" component={Scores} />
           </Switch>
         </StoreProvider>
+        <div className="d-block text-center">
+          <a className="text-light mr-5" href="/scores">View High Scores</a>
+          <span className="ml-5 text-light">Copyright &copy; 2020</span>
+        </div>
       </div>
     </Router>
   );
