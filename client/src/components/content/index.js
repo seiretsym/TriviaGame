@@ -8,6 +8,7 @@ import characters from "../../utils/characterbios";
 
 export const Content = () => {
   const [state, dispatch] = useStoreContext();
+  const [infoMsg, setInfoMsg] = React.useState("");
 
   useEffect(() => {
     // stop countdown if it reaches 0
@@ -27,6 +28,7 @@ export const Content = () => {
         phase: "question"
       })
     } else if (state.phase === "loading" && !state.question_loaded) {
+
       if (state.songHistory.length < state.question_limit) {
         // should probably load a song, but after 5 seconds
         setTimeout(handleSetAnswers, 5000);
@@ -54,7 +56,6 @@ export const Content = () => {
     }
     // else, end the game
     else {
-      console.log("attempt to end game from handleTransition")
       dispatch({
         type: SET_PHASE,
         loadTitle: title,
@@ -97,7 +98,7 @@ export const Content = () => {
         question_loaded: true,
         timer: 30
       })
-
+      setInfoMsg("Loading...")
     } else {
       // loop
       handleSetAnswers();
@@ -118,17 +119,22 @@ export const Content = () => {
     answers.sort(() => Math.random() - 0.5);
     return answers;
   }
+
   // when audio can play
   const handleCanPlay = event => {
-    let answerContent = document.getElementById("answers");
-    answerContent.classList.remove("d-none");
-    let audioPlayer = document.getElementById("audioplayer")
-    audioPlayer.play();
-    startTimer();
+    if (!state.timerOn) {
+      let answerContent = document.getElementById("answers");
+      answerContent.classList.remove("d-none");
+      setInfoMsg(`Time Left: ${state.timer} seconds`)
+      let audioPlayer = event.target
+      startTimer();
+      setTimeout(() => { audioPlayer.play() }, 700);
+    }
   }
 
   // handle timer countdown to 0
   const handleCountdown = () => {
+    setInfoMsg(`Time Left: ${state.timer} seconds`)
     dispatch({
       type: SET_TIMER,
       timer: state.timer--
@@ -208,12 +214,17 @@ export const Content = () => {
       })
   }
 
+  const handleAudioError = event => {
+    let audioPlayer = event.target;
+    audioPlayer.load();
+  }
+
   const renderEndGame = () => {
     return (
       <div>
         <div className="card mx-auto border border-dark rounded mb-3">
           <div className="card-title p-3 m-0">
-            {<h4>Your Score: {state.current_score}</h4>}
+            <h4>Your Score: {state.current_score}</h4>
           </div>
         </div>
         <div className="card mx-auto border border-dark rounded content-body">
@@ -246,7 +257,7 @@ export const Content = () => {
       case "wrong":
         return <h4>Wrong! The correct answer is <strong>{state.question.q.name}</strong>!</h4>
       default:
-        return <h4>Loading... please wait.</h4>
+        return <h4>Loading...</h4>
     }
 
   }
@@ -257,13 +268,13 @@ export const Content = () => {
       <div>
         <div className="card mx-auto border border-dark rounded mb-3">
           <div className="card-title p-3 m-0">
-            {<h4>Time Left: {state.timer} seconds</h4>}
+            <h4 id="info">{infoMsg}</h4>
           </div>
         </div>
         <div className="card mx-auto border border-dark rounded content-body">
           <div className="card-body">
             <div className="card-title text-center mt-1 mb-0">
-              <Audio id="audioplayer" src={state.question.q.url} controls controlsList="nodownload" onCanPlay={handleCanPlay} />
+              <Audio id="audioplayer" src={state.question.q.url} controls controlsList="nodownload" onCanPlay={handleCanPlay} onError={handleAudioError} />
             </div>
             <hr />
             <div id="answers" className="card-text d-none">
