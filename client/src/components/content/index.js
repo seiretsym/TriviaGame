@@ -3,8 +3,8 @@ import { browserHistory } from "react-router-v3";
 import { SET_QUESTION_LIMIT, SET_PHASE, SET_TIMER, TOGGLE_COUNTDOWN, LOAD_SONGS, SET_QUESTION, SET_CURRENT_SCORE, SET_PLAYER_NAME } from "../../utils/actions";
 import { useStoreContext } from "../../utils/globalState";
 import Audio from "../audio";
-import API from "../../utils/api";
 import api from "../../utils/api";
+import characters from "../../utils/characterbios";
 
 export const Content = () => {
   const [state, dispatch] = useStoreContext();
@@ -27,15 +27,25 @@ export const Content = () => {
         phase: "question"
       })
     } else if (state.phase === "loading" && !state.question_loaded) {
-      // should probably load a song, but after 5 seconds
-      setTimeout(handleSetAnswers, 5000);
+      if (state.songHistory.length < state.question_limit) {
+        // should probably load a song, but after 5 seconds
+        setTimeout(handleSetAnswers, 5000);
+      } else {
+        setTimeout(() => {
+          dispatch({
+            type: SET_PHASE,
+            phase: "end"
+          })
+        }, 5000)
+      }
     }
   })
 
   // handle loading game transitioning
   const handleTransition = title => {
-    // if the songhistory length is less than the set trivia question limit
+    // if the songhistory length is less than the question limit
     if (state.songHistory.length < state.question_limit) {
+      // continue playing
       dispatch({
         type: SET_PHASE,
         loadTitle: title,
@@ -44,17 +54,19 @@ export const Content = () => {
     }
     // else, end the game
     else {
-      // change phase to end game
+      console.log("attempt to end game from handleTransition")
       dispatch({
         type: SET_PHASE,
-        phase: "end"
+        loadTitle: title,
+        phase: "loading",
       })
     }
+
   }
 
   // start the game
   const handleStart = () => {
-    API
+    api
       .loadSongs()
       .then(({ data }) => {
         dispatch({
@@ -236,6 +248,7 @@ export const Content = () => {
       default:
         return <h4>Loading... please wait.</h4>
     }
+
   }
 
   // manipulate dom to display question and answer buttons
@@ -273,6 +286,7 @@ export const Content = () => {
 
   // manipulate dom to display loading state
   const renderLoadState = title => {
+    const rng = Math.floor(Math.random() * characters.length);
     return (
       <div>
         <div className="card mx-auto border border-dark rounded mb-3">
@@ -285,12 +299,12 @@ export const Content = () => {
             <div className="card-text m-auto">
               <div className="row">
                 <div className="col-lg-3 col-md-12">
-                  <img src="assets/images/therion.gif" alt="Therion, the Thief"></img>
+                  <img src={characters[rng].img} alt={characters[rng].name}></img>
                 </div>
                 <div className="col-lg-9 col-md-12 overflow-auto">
-                  <h5>Therion</h5>
+                  <h5>{characters[rng].name}</h5>
                   <hr />
-                  <p>His name is Therion, and he is a thief. While his past is a guarded secret, his exploits are known far and wide. Mere whispers of his extravagant heists strike fear into the hearts of the wealthy. Drifting into the Cliftlands one day, he hears a rumor of great riches to be had. He set his sights on a mansion said to be impregnable, only to find what he never expected...</p>
+                  <p>{characters[rng].desc}</p>
                 </div>
               </div>
             </div>

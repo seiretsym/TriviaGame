@@ -35,7 +35,7 @@ const Scoreboard = () => {
               rank = i + 1;
             }
             return (
-              <li className="list-group-item text-left d-flex" key={rank}>
+              <li className="list-group-item text-left d-flex bg-transparent" key={rank}>
                 <span className="btn btn-secondary text-light">{rank}</span>
                 <span className="btn btn-secondary text-light w-50 ml-2">{li.name}</span>
                 <span className="btn btn-secondary text-light w-100 ml-2"> {li.score}</span>
