@@ -240,7 +240,7 @@ export const Content = () => {
               Thank you for playing!
             </div>
             <div className="card-text">
-              Hope you enjoyed the music! Check out more of Yasunori Ishiki's work <a href="http://yasunorinishiki.com/" target="_new">here</a>
+              Hope you enjoyed the music! Check out more of Yasunori Nishiki's work <a href="http://yasunorinishiki.com/" target="_new">here</a>
             </div>
           </div>
         </div>
