@@ -233,10 +233,8 @@ export const Content = () => {
         <div className="card mx-auto border border-dark rounded content-body">
           <div className="card-body">
             <div>
-              <form>
-                <input className="form-control w-25 mx-auto" type="text" value={state.player_name} placeholder="Enter your name..." onChange={handleInputChange} />
-              </form>
-              <button className="btn btn-secondary text-light w-25 mt-1" onClick={handleSubmitScore}>Submit Score</button>
+              <input className="form-control submitname mx-auto" type="text" value={state.player_name} placeholder="Enter your name..." onChange={handleInputChange} />
+              <button className="btn btn-secondary text-light submitscore mt-1" onClick={handleSubmitScore}>Submit Score</button>
             </div>
             <hr />
             <div className="card-title mt-3">
