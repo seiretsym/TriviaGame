@@ -25,6 +25,7 @@ export const Content = () => {
       // dispatch to update
       dispatch({
         type: SET_PHASE,
+        loadTitle: state.loadTitle,
         phase: "question"
       })
     } else if (state.phase === "loading" && !state.question_loaded) {
@@ -36,6 +37,7 @@ export const Content = () => {
         setTimeout(() => {
           dispatch({
             type: SET_PHASE,
+            loadTitle: state.loadTitle,
             phase: "end"
           })
         }, 5000)
@@ -59,7 +61,7 @@ export const Content = () => {
       dispatch({
         type: SET_PHASE,
         loadTitle: title,
-        phase: "loading",
+        phase: "loading"
       })
     }
 
@@ -76,6 +78,7 @@ export const Content = () => {
         })
         dispatch({
           type: SET_PHASE,
+          loadTitle: state.loadTitle,
           phase: "loading"
         })
       })

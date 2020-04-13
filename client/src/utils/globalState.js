@@ -46,8 +46,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         loadTitle: action.loadTitle,
-        phase: action.phase,
-        question_loaded: action.question_loaded
+        phase: action.phase
       };
     case SET_PLAYER_NAME:
       return {
