@@ -1,6 +1,8 @@
-const path = require("path");
-const router = require("express").Router();
-const api = require("./api")
+import path from "path";
+import express from "express";
+import api from "./api";
+
+const router = express.Router();
 
 // api routes
 router.use("/api", api)
@@ -12,4 +14,4 @@ if (process.env.NODE_ENV === "production") {
     })
 }
 
-module.exports = router;
+export = router;

@@ -2,7 +2,7 @@
   "name": "TriviaGame",
   "version": "1.0.0",
   "description": "A trivia game that plays random music tracks for the player to guess the correct song title. It utilizes jQuery/JS to plug in answer buttons and music.",
-  "main": "server.js",
+  "main": "server.ts",
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
     "start:prod": "node server.js",
@@ -25,12 +25,13 @@
   },
   "homepage": "https://github.com/seiretsym/TriviaGame#readme",
   "dependencies": {
+    "@types/express": "^4.17.11",
     "express": "^4.17.1",
     "if-env": "^1.0.4",
     "mongoose": "^5.9.7"
   },
   "devDependencies": {
-    "nodemon": "^2.0.2",
-    "concurrently": "5.1.0"
+    "concurrently": "5.1.0",
+    "nodemon": "^2.0.2"
   }
 }
