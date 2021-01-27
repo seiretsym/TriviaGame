@@ -1,0 +1,11 @@
+export const ADD_SCORE: string = "ADD_SCORE";
+export const GET_WEEKLY: string = "GET_WEEKLY";
+export const GET_ALL:string = "GET_ALL";
+export const SET_CURRENT_SCORE:string = "SET_CURRENT_SCORE";
+export const SET_PHASE:string = "SET_PHASE";
+export const SET_PLAYER_NAME:string = "SET_PLAYER_NAME";
+export const SET_QUESTION:string = "SET_QUESTION";
+export const SET_QUESTION_LIMIT:string = "SET_QUESTION_LIMIT";
+export const SET_TIMER:string = "SET_TIMER";
+export const TOGGLE_COUNTDOWN:string = "TOGGLE_COUNTDOWN";
+export const LOAD_SONGS:string = "LOAD_SONGS";
