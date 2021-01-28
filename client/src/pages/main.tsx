@@ -13,7 +13,7 @@ class Main extends Component {
               <Header />
             </div>
             <div className="row mt-2">
-              <div className="col-12 bg p-3 text-center rounded border border-dark mt-3">
+              <div className="col-12 bg p-3 text-center rounded border border-dark mt-3 content">
                 <Content />
               </div>
             </div>
