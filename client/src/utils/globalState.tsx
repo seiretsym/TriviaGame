@@ -19,49 +19,50 @@ type iSongList = {
   url: string
 }
 
-type iQuestion = {
-  q: iSongList,
-  a: string[]
-}
-
 type iAction = {
   type: string,
-  songlist: iSongList[],
-  current_score: number,
-  loadTitle: string,
-  phase: string,
-  player_name: string,
-  question: {
-    name: string,
-    url: string
+  songlist?: iSongList[],
+  current_score?: number,
+  loadTitle?: string,
+  phase?: string,
+  player_name?: string,
+  question?: {
+    name?: string,
+    url?: string
   },
-  answers: string[],
-  question_loaded: boolean,
-  songHistory: string[],
-  timer: number,
-  question_limit: number,
-  countdown: number,
-  timerOn: boolean
+  answers?: string[],
+  question_loaded?: boolean,
+  songHistory?: string[],
+  timer?: number,
+  question_limit?: number,
+  countdown?: void | number | NodeJS.Timeout,
+  timerOn?: boolean
 }
 
 type iState = {
   scores: number[],
-  phase: string,
+  phase?: string,
   questions: number,
-  timer: number,
-  timerOn: boolean,
-  countdown: number,
-  songHistory: string[],
-  question_loaded: boolean,
-  question_limit: number,
-  current_score: number,
-  player_name: string,
-  loadTitle: string,
-  songlist: iSongList[],
-  question: iQuestion
+  timer?: number,
+  timerOn?: boolean,
+  countdown: void | number | NodeJS.Timeout,
+  songHistory?: string[],
+  question_loaded?: boolean,
+  question_limit?: number,
+  current_score?: number,
+  player_name?: string,
+  loadTitle?: string,
+  songlist?: iSongList[],
+  question: {
+    q: {
+      name?: string,
+      url?: string
+    }
+    a: string[]
+  },
 }
 
-const reducer = (state: iState, action: iAction):iState => {
+const reducer = (state: iState, action: iAction): iState => {
   switch (action.type) {
     case ADD_SCORE:
       return {
@@ -103,10 +104,10 @@ const reducer = (state: iState, action: iAction):iState => {
         ...state,
         question: {
           q: {
-            name: action.question.name,
-            url: action.question.url
+            name: action.question?.name,
+            url: action.question?.url
           },
-          a: [...action.answers]
+          a: [...action.answers!]
         },
         question_loaded: action.question_loaded,
         songHistory: action.songHistory,
@@ -136,7 +137,7 @@ const reducer = (state: iState, action: iAction):iState => {
 
 type iProvider = {
   state: iState,
-  dispatch: React.Dispatch<any>
+  dispatch: React.Dispatch<iAction>
 }
 
 const initialState: iState = {
@@ -159,7 +160,7 @@ const initialState: iState = {
       url: ""
     },
     a: []
-  }
+  },
 }
 
 const StoreContext = createContext<iProvider>({ state: initialState, dispatch: () => null});

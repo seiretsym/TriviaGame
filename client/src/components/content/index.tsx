@@ -11,10 +11,10 @@ export const Content = () => {
 
   useEffect(() => {
     // stop countdown if it reaches 0
-    if (state.timer <= 0 && state.timerOn && state.phase === "question") {
+    if (state.timer! <= 0 && state.timerOn && state.phase === "question") {
       dispatch({
         type: TOGGLE_COUNTDOWN,
-        countdown: clearInterval(state.countdown),
+        countdown: window.clearInterval(state.countdown as NodeJS.Timeout),
         timerOn: false,
         question_loaded: false
       })
@@ -29,7 +29,7 @@ export const Content = () => {
       })
     } else if (state.phase === "loading" && !state.question_loaded) {
 
-      if (state.songHistory.length < state.question_limit) {
+      if (state.songHistory!.length < state.question_limit!) {
         // should probably load a song, but after 5 seconds
         setTimeout(handleSetAnswers, 5000);
       } else {
@@ -47,7 +47,7 @@ export const Content = () => {
   // handle loading game transitioning
   const handleTransition = (title: string) => {
     // if the songhistory length is less than the question limit
-    if (state.songHistory.length < state.question_limit) {
+    if (state.songHistory!.length < state.question_limit!) {
       // continue playing
       dispatch({
         type: SET_PHASE,
@@ -86,15 +86,15 @@ export const Content = () => {
   // pick random song and generate false answers
   const handleSetAnswers = () => {
     // grab a random song from songlist
-    let rng = Math.floor(Math.random() * state.songlist.length)
-    let song = state.songlist[rng];
+    let rng = Math.floor(Math.random() * state.songlist!.length)
+    let song = state.songlist![rng];
     // check song history for duplicates
-    if (state.songHistory.indexOf(song.name) === -1) {
+    if (state.songHistory!.indexOf(song.name) === -1) {
       let answers = generateAnswers(song);
       // song hasn't been played, so set questions
       dispatch({
         type: SET_QUESTION,
-        songHistory: [...state.songHistory, song.name],
+        songHistory: [...state.songHistory!, song.name],
         question: song,
         answers: answers,
         question_loaded: true,
@@ -115,8 +115,8 @@ export const Content = () => {
     let answers = [song.name];
     // generate false answers
     while (answers.length < 4) {
-      let rng = Math.floor(Math.random() * state.songlist.length);
-      let falseAnswer = state.songlist[rng].name;
+      let rng = Math.floor(Math.random() * state.songlist!.length);
+      let falseAnswer = state.songlist![rng].name;
       if (answers.indexOf(falseAnswer) === -1) {
         answers = [...answers, falseAnswer]
       }
@@ -143,7 +143,7 @@ export const Content = () => {
     setInfoMsg(`Time Left: ${state.timer} seconds`)
     dispatch({
       type: SET_TIMER,
-      timer: state.timer--
+      timer: state.timer!--
     })
   }
 
@@ -167,12 +167,12 @@ export const Content = () => {
       // first, update the current score
       dispatch({
         type: SET_CURRENT_SCORE,
-        current_score: state.current_score + state.timer * 10000
+        current_score: state.current_score! + state.timer! * 10000
       })
       // next, stop the interval
       dispatch({
         type: TOGGLE_COUNTDOWN,
-        countdown: clearInterval(state.countdown),
+        countdown: window.clearInterval(state.countdown as NodeJS.Timeout),
         timerOn: false,
         question_loaded: false
       })
@@ -182,7 +182,7 @@ export const Content = () => {
       // wrong answer, stop interval
       dispatch({
         type: TOGGLE_COUNTDOWN,
-        countdown: clearInterval(state.countdown),
+        countdown: window.clearInterval(state.countdown as NodeJS.Timeout),
         timerOn: false,
         question_loaded: false
       })
@@ -194,7 +194,7 @@ export const Content = () => {
   const startTimer = () => {
     dispatch({
       type: TOGGLE_COUNTDOWN,
-      countdown: setInterval(handleCountdown, 1000),
+      countdown: window.setInterval(handleCountdown, 1000),
       timerOn: true
     })
   }
@@ -278,7 +278,7 @@ export const Content = () => {
         <div className="card mx-auto border border-dark rounded content-body">
           <div className="card-body">
             <div className="card-title text-center mt-1 mb-0">
-              <Audio id="audioplayer" src={state.question.q.url} onCanPlay={handleCanPlay} onError={handleAudioError} />
+              <Audio id="audioplayer" src={state.question.q.url!} onCanPlay={handleCanPlay} onError={handleAudioError} />
             </div>
             <hr />
             <div id="answers" className="card-text d-none">
@@ -365,7 +365,7 @@ export const Content = () => {
     case "question":
       return renderAskQuestion();
     case "loading":
-      return renderLoadState(state.loadTitle);
+      return renderLoadState(state.loadTitle!);
     case "start":
       return renderGameInit();
     default: {
