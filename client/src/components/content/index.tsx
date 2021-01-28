@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { browserHistory } from "react-router-v3";
+import React, { ChangeEvent, MouseEvent, SyntheticEvent, useEffect } from "react";
 import { SET_QUESTION_LIMIT, SET_PHASE, SET_TIMER, TOGGLE_COUNTDOWN, LOAD_SONGS, SET_QUESTION, SET_CURRENT_SCORE, SET_PLAYER_NAME } from "../../utils/actions";
 import { useStoreContext } from "../../utils/globalState";
 import Audio from "../audio";
@@ -7,7 +6,7 @@ import api from "../../utils/api";
 import characters from "../../utils/characterbios";
 
 export const Content = () => {
-  const [state, dispatch] = useStoreContext();
+  const { state, dispatch } = useStoreContext();
   const [infoMsg, setInfoMsg] = React.useState("");
 
   useEffect(() => {
@@ -46,7 +45,7 @@ export const Content = () => {
   })
 
   // handle loading game transitioning
-  const handleTransition = title => {
+  const handleTransition = (title: string) => {
     // if the songhistory length is less than the question limit
     if (state.songHistory.length < state.question_limit) {
       // continue playing
@@ -108,7 +107,11 @@ export const Content = () => {
     }
   }
 
-  const generateAnswers = song => {
+  interface iSong {
+    name: string
+  }
+
+  const generateAnswers = (song: iSong) => {
     let answers = [song.name];
     // generate false answers
     while (answers.length < 4) {
@@ -124,12 +127,12 @@ export const Content = () => {
   }
 
   // when audio can play
-  const handleCanPlay = event => {
+  const handleCanPlay = (event: SyntheticEvent<HTMLAudioElement>) => {
     if (!state.timerOn) {
-      let answerContent = document.getElementById("answers");
+      let answerContent: HTMLElement = document.getElementById("answers")!;
       answerContent.classList.remove("d-none");
       setInfoMsg(`Time Left: ${state.timer} seconds`)
-      let audioPlayer = event.target
+      let audioPlayer = event.target as HTMLAudioElement;
       startTimer();
       setTimeout(() => { audioPlayer.play() }, 700);
     }
@@ -144,19 +147,20 @@ export const Content = () => {
     })
   }
 
+
   // handle user choice for amount of questions
-  const handleSetQuestions = event => {
+  const handleSetQuestions = (event: ChangeEvent<HTMLSelectElement>) => {
     const { value } = event.target;
     dispatch({
       type: SET_QUESTION_LIMIT,
-      question_limit: value
+      question_limit: parseInt(value)
     })
   }
 
   // handle answer submission
-  const handleSubmitAnswer = event => {
+  const handleSubmitAnswer = (event: MouseEvent<HTMLButtonElement>) => {
     // get textContent from target button
-    const { textContent: answer } = event.target;
+    const { textContent: answer } = event.target as HTMLElement;
 
     // do answer check here
     if (answer === state.question.q.name) {
@@ -195,7 +199,7 @@ export const Content = () => {
     })
   }
 
-  const handleInputChange = event => {
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
     const { value } = event.target;
     dispatch({
@@ -212,13 +216,12 @@ export const Content = () => {
     api
       .saveScore(data)
       .then(() => {
-        browserHistory.push("/scores");
         window.location.reload();
       })
   }
 
-  const handleAudioError = event => {
-    let audioPlayer = event.target;
+  const handleAudioError = (event: SyntheticEvent<HTMLAudioElement>) => {
+    let audioPlayer = event.target as HTMLAudioElement;
     audioPlayer.load();
   }
 
@@ -249,7 +252,7 @@ export const Content = () => {
     )
   }
   // manipulate dom based on how a question was resolved
-  const renderLoadingTitle = title => {
+  const renderLoadingTitle = (title: string) => {
     switch (title) {
       case "timeout":
         return <h4>Time's up! The correct answer is <strong>{state.question.q.name}</strong>.</h4>
@@ -297,7 +300,7 @@ export const Content = () => {
   }
 
   // manipulate dom to display loading state
-  const renderLoadState = title => {
+  const renderLoadState = (title: string) => {
     const rng = Math.floor(Math.random() * characters.length);
     return (
       <div>

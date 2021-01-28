@@ -20,7 +20,7 @@ if (process.env.NODE_ENV === "production") {
 app.use(routes);
 
 // connect to mongo~
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/triviagame");
+mongoose.connect(process.env.MONGODB_URI || "mongodb+srv://derpwin:derpderp@derptrivia.nemwe.mongodb.net/derptrivia");
 
 // start server
 app.listen(PORT, () => console.log("Server listening on port: " + PORT))

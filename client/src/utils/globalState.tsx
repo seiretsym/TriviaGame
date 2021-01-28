@@ -13,27 +13,55 @@ import {
   TOGGLE_COUNTDOWN
 } from "./actions";
 
-export interface iAction {
+
+type iSongList = {
+  name: string,
+  url: string
+}
+
+type iQuestion = {
+  q: iSongList,
+  a: string[]
+}
+
+type iAction = {
   type: string,
-  songlist: Array<object>,
+  songlist: iSongList[],
   current_score: number,
   loadTitle: string,
   phase: string,
   player_name: string,
-  question: string,
-  answers: Array<string>,
+  question: {
+    name: string,
+    url: string
+  },
+  answers: string[],
   question_loaded: boolean,
-  songHistory: Array<string>,
+  songHistory: string[],
   timer: number,
   question_limit: number,
   countdown: number,
   timerOn: boolean
 }
 
-const StoreContext = createContext(undefined);
-const { Provider } = StoreContext;
+type iState = {
+  scores: number[],
+  phase: string,
+  questions: number,
+  timer: number,
+  timerOn: boolean,
+  countdown: number,
+  songHistory: string[],
+  question_loaded: boolean,
+  question_limit: number,
+  current_score: number,
+  player_name: string,
+  loadTitle: string,
+  songlist: iSongList[],
+  question: iQuestion
+}
 
-const reducer = (state: object, action: iAction) => {
+const reducer = (state: iState, action: iAction):iState => {
   switch (action.type) {
     case ADD_SCORE:
       return {
@@ -74,8 +102,11 @@ const reducer = (state: object, action: iAction) => {
       return {
         ...state,
         question: {
-          q: action.question,
-          a: action.answers
+          q: {
+            name: action.question.name,
+            url: action.question.url
+          },
+          a: [...action.answers]
         },
         question_loaded: action.question_loaded,
         songHistory: action.songHistory,
@@ -103,22 +134,40 @@ const reducer = (state: object, action: iAction) => {
   }
 };
 
-const StoreProvider = ({ value = [], ...props }) => {
-  const [state, dispatch] = useReducer(reducer, {
-    scores: [],
-    phase: "start",
-    questions: 10,
-    timer: 30,
-    timerOn: false,
-    countdown: null,
-    songHistory: [],
-    question_loaded: false,
-    question_limit: 10,
-    current_score: 0,
-    player_name: ""
-  });
+type iProvider = {
+  state: iState,
+  dispatch: React.Dispatch<any>
+}
 
-  return <Provider value={[state, dispatch]} {...props} />;
+const initialState: iState = {
+  scores: [],
+  phase: "start",
+  questions: 10,
+  timer: 30,
+  timerOn: false,
+  countdown: 0,
+  songHistory: [],
+  question_loaded: false,
+  question_limit: 10,
+  current_score: 0,
+  player_name: "",
+  loadTitle: "",
+  songlist: [],
+  question: {
+    q: {
+      name: "",
+      url: ""
+    },
+    a: []
+  }
+}
+
+const StoreContext = createContext<iProvider>({ state: initialState, dispatch: () => null});
+const { Provider } = StoreContext;
+
+const StoreProvider: React.FC = ({ ...props }) => {
+  const [ state, dispatch ] = useReducer(reducer, initialState);
+  return <Provider value={{state, dispatch}} {...props} />;
 };
 
 const useStoreContext = () => {

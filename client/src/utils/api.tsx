@@ -5,7 +5,7 @@ export default {
   loadSongs: function () {
     return axios.get("/api/songs");
   },
-  saveScore: function (data) {
+  saveScore: function (data: object) {
     return axios.post("/api/scores", data)
   },
   getScores: function () {

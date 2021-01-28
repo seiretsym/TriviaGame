@@ -2,7 +2,13 @@ import React, { useState, useEffect } from "react";
 import api from "../../utils/api";
 
 const Scoreboard = () => {
-  const [score, setScore] = useState([]);
+  type player = {
+    name: string,
+    score: number,
+  }
+
+  const sb: Array<player> = []
+  const [score, setScore] = useState(sb);
 
   useEffect(() => {
     if (score.length < 1) {
