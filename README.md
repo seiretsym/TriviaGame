@@ -11,7 +11,7 @@ A trivia game that plays random music tracks for the player to guess the correct
 - Highscores Tracker
 
 ## Learning Experience
-- Learned to utilize Typescript with React
+- Learned to utilize Typescript with React, Express, and Mongoose.
 
 ## Links
 v2 Demo: https://derptrivia.herokuapp.com<br>
