@@ -1,23 +1,17 @@
 # Octopath Traveler: Music Trivia
-**Technologies Used:** React, Mongoose, Heoku, HTML, Bootstrap, Javascript, CSS, Git, GitHub, VSCode 
+**Technologies Used:** React, Mongoose, Heoku, HTML, Bootstrap, TypeScript, Javascript, CSS, Git, GitHub, VSCode 
 
 ## Summary
 A trivia game that plays random music tracks for the player to guess the correct song title.
 
 ### **Highlights:**
+- Uses TypeScript for static typing, classes, and interfaces
 - Uses React Hooks and Global State
 - Deployed on Heroku
 - Highscores Tracker
 
-## Goals
-- Improve Highscores (Weekly Highscores)
-- Allow for music to continue playing during question transitions
-
 ## Learning Experience
-- Got a lot more comfortable with React Hooks
-
-## Site Picture
-![Octopath Traveler: Music Trivia](assets/images/readme.PNG)
+- Learned to utilize Typescript with React
 
 ## Links
 v2 Demo: https://derptrivia.herokuapp.com<br>
