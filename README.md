@@ -17,6 +17,7 @@ A trivia game that plays random music tracks for the player to guess the correct
 - Got a lot more comfortable with React Hooks
 
 ## Links
+Typescript Version: https://github.com/seiretsym/TriviaGame/tree/typescript
 v2 Demo: https://derptrivia.herokuapp.com<br>
 v1 Demo: https://seiretsym.github.io/TriviaGame<br>
 Repo: https://github.com/seiretsym/TriviaGame<br>
